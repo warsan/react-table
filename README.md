@@ -380,10 +380,10 @@ This works for any library, not just `react-router`.
 
 ## Importing a Component
 
-This project setup supports ES6 modules thanks to Babel.<br>
-While you can still use `require()` and `module.exports`, we encourage you to use [`import` and `export`](http://exploringjs.com/es6/ch_modules.html) instead.
+Эта установка проекта поддерживает модули ES6 благодаря Babel.<br>
+Хотя вы все еще можете использовать `require()` и `module.exports`, взамен мы предлагаем [`import` и `export`](http://exploringjs.com/es6/ch_modules.html).
 
-For example:
+Например:
 
 ### `Button.js`
 
@@ -396,7 +396,7 @@ class Button extends Component {
   }
 }
 
-export default Button; // Don’t forget to use export default!
+export default Button; // Не забудьте использовать экспорт по умолчанию!
 ```
 
 ### `DangerButton.js`
@@ -404,7 +404,7 @@ export default Button; // Don’t forget to use export default!
 
 ```js
 import React, { Component } from 'react';
-import Button from './Button'; // Import a component from another file
+import Button from './Button'; // Импортировать компонент из другого файла
 
 class DangerButton extends Component {
   render() {
@@ -415,13 +415,15 @@ class DangerButton extends Component {
 export default DangerButton;
 ```
 
-Be aware of the [difference between default and named exports](http://stackoverflow.com/questions/36795819/react-native-es-6-when-should-i-use-curly-braces-for-import/36796281#36796281). It is a common source of mistakes.
+Помните о [разнице между экспортом по умолчанию и именованным экспортом](http://stackoverflow.com/questions/36795819/react-native-es-6-when-should-i-use-curly-braces-for-import/36796281#36796281). Это частый источник ошибок.
 
-We suggest that you stick to using default imports and exports when a module only exports a single thing (for example, a component). That’s what you get when you use `export default Button` and `import Button from './Button'`.
+Мы предлагаем вам придерживаться использования импорта и экспорта по умолчанию, когда модуль экспортирует только одну вещь (например, компонент).  
+Это то, что вы получаете, когда используете `export default Button` и `import Button from './Button'`.
 
-Named exports are useful for utility modules that export several functions. A module may have at most one default export and as many named exports as you like.
+Именованный экспорт полезен для служебных модулей, которые экспортируют несколько функций.  
+Модуль может иметь не более одного экспорта по умолчанию а именованных экспортов - столько, сколько вам нужно.
 
-Learn more about ES6 modules:
+Узнайте больше о модулях ES6:
 
 * [When to use the curly braces?](http://stackoverflow.com/questions/36795819/react-native-es-6-when-should-i-use-curly-braces-for-import/36796281#36796281)
 * [Exploring ES6: Modules](http://exploringjs.com/es6/ch_modules.html)
@@ -451,10 +453,10 @@ class App extends Component {
   handleClick = () => {
     import('./moduleA')
       .then(({ moduleA }) => {
-        // Use moduleA
+        // Использовать moduleA
       })
       .catch(err => {
-        // Handle failure
+        // Обработка отказа
       });
   };
 
@@ -470,15 +472,16 @@ class App extends Component {
 export default App;
 ```
 
-This will make `moduleA.js` and all its unique dependencies as a separate chunk that only loads after the user clicks the 'Load' button.
+Это сделает `moduleA.js` и все его уникальные зависимости в виде отдельного фрагмента, который загружается только после того, как пользователь щелкнет кнопку 'Load'.
 
-You can also use it with `async` / `await` syntax if you prefer it.
+Вы также можете использовать его с синтаксисом `async`/`await`, если хотите.
 
 ### With React Router
 
-If you are using React Router check out [this tutorial](http://serverless-stack.com/chapters/code-splitting-in-create-react-app.html) on how to use code splitting with it. You can find the companion GitHub repository [here](https://github.com/AnomalyInnovations/serverless-stack-demo-client/tree/code-splitting-in-create-react-app).
+Если используете React Router, ознакомьтесь с [этим руководством](http://serverless-stack.com/chapters/code-splitting-in-create-react-app.html) там есть о разделении кода.
+Сопутствующий репозиторий GitHub можно найти [здесь](https://github.com/AnomalyInnovations/serverless-stack-demo-client/tree/code-splitting-in-create-react-app).
 
-Also check out the [Code Splitting](https://reactjs.org/docs/code-splitting.html) section in React documentation.
+Также ознакомьтесь с разделом [Разделение кода](https://reactjs.org/docs/code-splitting.html) в документации React.
 
 ## Adding a Stylesheet
 
@@ -496,11 +499,11 @@ This project setup uses [Webpack](https://webpack.js.org/) for handling all asse
 
 ```js
 import React, { Component } from 'react';
-import './Button.css'; // Tell Webpack that Button.js uses these styles
+import './Button.css'; // Сообщите Webpack, что Button.js использует эти стили
 
 class Button extends Component {
   render() {
-    // You can use them as regular CSS styles
+    // Вы можете использовать их как обычные стили CSS.
     return <div className="Button" />;
   }
 }
