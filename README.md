@@ -431,9 +431,9 @@ export default DangerButton;
 
 ## Code Splitting
 
-Instead of downloading the entire app before users can use it, code splitting allows you to split your code into small chunks which you can then load on demand.
+Вместо загрузки всего приложения, прежде чем пользователи засмеются над ним, расщепление кода позволяет разделить код на небольшие куски, которые затем можно загрузить по требованию.
 
-This project setup supports code splitting via [dynamic `import()`](http://2ality.com/2017/01/import-operator.html#loading-code-on-demand). Its [proposal](https://github.com/tc39/proposal-dynamic-import) is in stage 3. The `import()` function-like form takes the module name as an argument and returns a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which always resolves to the namespace object of the module.
+Эта настройка проекта поддерживает разделение кода через [dynamic `import()`](http://2ality.com/2017/01/import-operator.html#loading-code-on-demand). Its [proposal](https://github.com/tc39/proposal-dynamic-import) is in stage 3. The `import()` function-like form takes the module name as an argument and returns a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) which always resolves to the namespace object of the module.
 
 Here is an example:
 

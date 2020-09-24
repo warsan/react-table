@@ -46,9 +46,9 @@ class SimpleTabs extends Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange}>
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" href="#basic-tabs" />
+            <Tab label="Пункт 1" />
+            <Tab label="Пункт 2" />
+            <Tab label="Пункт 3" href="#basic-tabs" />
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer>Пункт первый</TabContainer>}
@@ -65,13 +65,13 @@ class SimpleTabs extends Component {
               scrollable
               scrollButtons="auto"
             >
-              <Tab label="Item One" />
-              <Tab label="Item Two" />
-              <Tab label="Item Three" />
-              <Tab label="Item Four" />
-              <Tab label="Item Five" />
-              <Tab label="Item Six" />
-              <Tab label="Item Seven" />
+              <Tab label="Пункт Первый" />
+              <Tab label="Пункт Второй" />
+              <Tab label="Пункт Третий" />
+              <Tab label="Пункт Четвёртый" />
+              <Tab label="Пункт пятый" />
+              <Tab label="Пункт шестой" />
+              <Tab label="Пункт седьмой" />
             </Tabs>
           </AppBar>
           {value === 0 && <TabContainer>Пункт первый</TabContainer>}
