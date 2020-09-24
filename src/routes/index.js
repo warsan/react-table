@@ -78,61 +78,61 @@ const Routes = props => {
                 <ListItemIcon>
                   <InboxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Home" />
+                <ListItemText primary="Главная" />
               </ListItem>
               <ListItem button component={Link} to="/tabs">
                 <ListItemIcon>
                   <InboxIcon />
                 </ListItemIcon>
-                <ListItemText primary="Tabs" />
+                <ListItemText primary="Вкладки" />
               </ListItem>
               <ListItem button component={Link} to="/cards">
                 <ListItemIcon>
                   <StarIcon />
                 </ListItemIcon>
-                <ListItemText primary="Cards" />
+                <ListItemText primary="Открытки" />
               </ListItem>
               <ListItem button component={Link} to="/navigation">
                 <ListItemIcon>
                   <StarIcon />
                 </ListItemIcon>
-                <ListItemText primary="Navigation" />
+                <ListItemText primary="Навигации" />
               </ListItem>
               <ListItem button component={Link} to="/gridlist">
                 <ListItemIcon>
                   <StarIcon />
                 </ListItemIcon>
-                <ListItemText primary="GridList" />
+                <ListItemText primary="Сетки" />
               </ListItem>
               <ListItem button component={Link} to="/forms">
                 <ListItemIcon>
                   <SendIcon />
                 </ListItemIcon>
-                <ListItemText primary="Forms" />
+                <ListItemText primary="Формы" />
               </ListItem>
               <ListItem button component={Link} to="/lists">
                 <ListItemIcon>
                   <SendIcon />
                 </ListItemIcon>
-                <ListItemText primary="Lists" />
+                <ListItemText primary="Списки" />
               </ListItem>
               <ListItem button component={Link} to="/modal">
                 <ListItemIcon>
                   <SendIcon />
                 </ListItemIcon>
-                <ListItemText primary="Modal" />
+                <ListItemText primary="Модалка" />
               </ListItem>
               <ListItem button component={Link} to="/tables">
                 <ListItemIcon>
                   <DraftsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Tables" />
+                <ListItemText primary="Таблицы" />
               </ListItem>
               <ListItem button component={Link} to="/themes">
                 <ListItemIcon>
                   <DraftsIcon />
                 </ListItemIcon>
-                <ListItemText primary="Themes" />
+                <ListItemText primary="Темы" />
               </ListItem>
             </List>
           </Drawer>
