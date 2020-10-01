@@ -1052,98 +1052,101 @@ Create React App добавит поддержку декораторов, ко�
 
 ## Fetching Data with AJAX Requests
 
-React doesn't prescribe a specific approach to data fetching, but people commonly use either a library like [axios](https://github.com/axios/axios) or the [`fetch()` API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) provided by the browser. Conveniently, Create React App includes a polyfill for `fetch()` so you can use it without worrying about the browser support.
+React не предписывает особого подхода к извлечению данных, но люди обычно используют либо библиотеку, например [axios](https://github.com/axios/axios), либо [`fetch()` API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), предоставляемый браузером. Удобно, что приложение Create React включает полифил для `fetch()`, так что вы можете использовать его, не беспокоясь о поддержке браузера.
 
-The global `fetch` function allows to easily makes AJAX requests. It takes in a URL as an input and returns a `Promise` that resolves to a `Response` object. You can find more information about `fetch` [here](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch).
+Глобальная функция `fetch` позволяет легко делать запросы AJAX. Он принимает URL-адрес в качестве входных данных и возвращает обещание, которое преобразуется в объект `Response`. Вы можете найти дополнительную информацию о `fetch` [здесь](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch).
 
-This project also includes a [Promise polyfill](https://github.com/then/promise) which provides a full implementation of Promises/A+. A Promise represents the eventual result of an asynchronous operation, you can find more information about Promises [here](https://www.promisejs.org/) and [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). Both axios and `fetch()` use Promises under the hood. You can also use the [`async / await`](https://davidwalsh.name/async-await) syntax to reduce the callback nesting.
+Этот проект также включает в себя [полифил Promise](https://github.com/then/promise), который обеспечивает полную реализацию Promises/A+.
+Promise представляет собой конечный результат асинхронной операции, вы можете найти дополнительную информацию о Promises [здесь](https://www.promisejs.org/) и [здесь](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). 
+И axios, и `fetch()` используют Promises под капотом. Вы также можете использовать синтаксис [`async / await`](https://davidwalsh.name/async-await), чтобы уменьшить вложенность обратных вызовов.
 
-You can learn more about making AJAX requests from React components in [the FAQ entry on the React website](https://reactjs.org/docs/faq-ajax.html).
+Вы можете узнать больше о выполнении запросов AJAX из компонентов React в [записях FAQ на веб-сайте React](https://reactjs.org/docs/faq-ajax.html).
 
 ## Integrating with an API Backend
 
-These tutorials will help you to integrate your app with an API backend running on another port,
-using `fetch()` to access it.
+Эти руководства помогут вам интегрировать ваше приложение с серверной частью API, работающей на другом порту,
+используя `fetch()` для доступа к нему.
 
 ### Node
-Check out [this tutorial](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/).
-You can find the companion GitHub repository [here](https://github.com/fullstackreact/food-lookup-demo).
+Посмотрите [это руководство](https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/).
+Вы можете найти сопутствующий репозиторий GitHub [здесь](https://github.com/fullstackreact/food-lookup-demo).
 
 ### Ruby on Rails
 
-Check out [this tutorial](https://www.fullstackreact.com/articles/how-to-get-create-react-app-to-work-with-your-rails-api/).
-You can find the companion GitHub repository [here](https://github.com/fullstackreact/food-lookup-demo-rails).
+Посмотрите [это руководство](https://www.fullstackreact.com/articles/how-to-get-create-react-app-to-work-with-your-rails-api/).
+Вы можете найти сопутствующий репозиторий GitHub [здесь](https://github.com/fullstackreact/food-lookup-demo-rails).
 
 ## Proxying API Requests in Development
 
->Note: this feature is available with `react-scripts@0.2.3` and higher.
+> Примечание: эта функция доступна в `react-scripts@0.2.3` и выше.
 
-People often serve the front-end React app from the same host and port as their backend implementation.<br>
-For example, a production setup might look like this after the app is deployed:
+Люди часто обслуживают клиентское приложение React с того же хоста и порта, что и их внутренняя реализация.<br>
+Например, после развертывания приложения производственная установка может выглядеть так:
 
 ```
-/             - static server returns index.html with React app
-/todos        - static server returns index.html with React app
-/api/todos    - server handles any /api/* requests using the backend implementation
+/             - статический сервер возвращает index.html с приложением React
+/todos        - статический сервер возвращает index.html с приложением React
+/api/todos    - сервер обрабатывает любые запросы /api/*, используя внутреннюю реализацию
 ```
 
-Such setup is **not** required. However, if you **do** have a setup like this, it is convenient to write requests like `fetch('/api/todos')` without worrying about redirecting them to another host or port during development.
+Такая настройка **не** требуется. Однако, если у вас **есть** такая настройка, удобно писать запросы типа `fetch ('/api/todos')`, не беспокоясь о перенаправлении их на другой хост или порт во время разработки.
 
-To tell the development server to proxy any unknown requests to your API server in development, add a `proxy` field to your `package.json`, for example:
+Чтобы указать серверу разработки проксировать любые неизвестные запросы к вашему серверу API в процессе разработки, добавьте поле `proxy` в ваш `package.json`, например:
 
 ```js
   "proxy": "http://localhost:4000",
 ```
 
-This way, when you `fetch('/api/todos')` in development, the development server will recognize that it’s not a static asset, and will proxy your request to `http://localhost:4000/api/todos` as a fallback. The development server will **only** attempt to send requests without `text/html` in its `Accept` header to the proxy.
+Таким образом, когда вы `fetch('/api/todos')` в процессе разработки, сервер разработки распознает, что это не статический актив, и передаст ваш запрос на `http://localhost:4000/api/todos` как запасной вариант. Сервер разработки будет **только** пытаться отправлять запросы без `text/html` в заголовке `Accept` на прокси.
 
-Conveniently, this avoids [CORS issues](http://stackoverflow.com/questions/21854516/understanding-ajax-cors-and-security-considerations) and error messages like this in development:
+Удобно, что это позволяет избежать [проблем с CORS](http://stackoverflow.com/questions/21854516/understanding-ajax-cors-and-security-considerations) и подобных сообщений об ошибках в разработке:
 
 ```
-Fetch API cannot load http://localhost:4000/api/todos. No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:3000' is therefore not allowed access. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+Fetch API не может загрузить http://localhost:4000/api/todos. На запрошенном ресурсе отсутствует заголовок 'Access-Control-Allow-Origin'. Поэтому к источнику 'http://localhost:3000' доступ запрещен. Если непрозрачный ответ соответствует вашим потребностям, установите режим запроса на 'no-cors', чтобы получить ресурс с отключенным CORS.
 ```
 
-Keep in mind that `proxy` only has effect in development (with `npm start`), and it is up to you to ensure that URLs like `/api/todos` point to the right thing in production. You don’t have to use the `/api` prefix. Any unrecognized request without a `text/html` accept header will be redirected to the specified `proxy`.
+Имейте в виду, что `proxy` действует только при разработке (с `npm start`), и вы должны убедиться, что URL-адреса, такие как `/api/todos`, указывают на правильную вещь в рабочей среде. Вам не нужно использовать префикс `/api`. Любой нераспознанный запрос без заголовка accept `text/html` будет перенаправлен на указанный `proxy`.
 
-The `proxy` option supports HTTP, HTTPS and WebSocket connections.<br>
-If the `proxy` option is **not** flexible enough for you, alternatively you can:
+Опция `proxy` поддерживает соединения HTTP, HTTPS и WebSocket.<br>
+Если опция `proxy` **недостаточна** для вашей гибкости, вы можете также:
 
-* [Configure the proxy yourself](#configuring-the-proxy-manually)
-* Enable CORS on your server ([here’s how to do it for Express](http://enable-cors.org/server_expressjs.html)).
-* Use [environment variables](#adding-custom-environment-variables) to inject the right server host and port into your app.
+* [Настроить прокси самостоятельно](#configuring-the-proxy-manually)
+* Включить CORS на своем сервере ([вот как это сделать для Express](http://enable-cors.org/server_expressjs.html)).
+* Использовать [переменные среды](#adding-custom-environment-variables), чтобы добавить правильный хост и порт сервера в ваше приложение.
 
 ### "Invalid Host Header" Errors After Configuring Proxy
 
-When you enable the `proxy` option, you opt into a more strict set of host checks. This is necessary because leaving the backend open to remote hosts makes your computer vulnerable to DNS rebinding attacks. The issue is explained in [this article](https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a) and [this issue](https://github.com/webpack/webpack-dev-server/issues/887).
+Когда вы включаете опцию `proxy`, вы выбираете более строгий набор проверок хоста. Это необходимо, потому что если оставить серверную часть открытой для удаленных хостов, ваш компьютер станет уязвимым для атак повторного связывания DNS. Проблема объясняется в [этой статье](https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a) и [в этом выпуске](https://github.com/webpack/webpack-dev-server/issues/887).
 
-This shouldn’t affect you when developing on `localhost`, but if you develop remotely like [described here](https://github.com/facebookincubator/create-react-app/issues/2271), you will see this error in the browser after enabling the `proxy` option:
+Это не должно влиять на вас при разработке на `localhost`, но если вы разрабатываете удаленно, как [описано здесь](https://github.com/facebookincubator/create-react-app/issues/2271), вы увидите эту ошибку в браузере после включения опции `proxy`:
 
->Invalid Host header
+>Недействительный заголовок хоста
 
-To work around it, you can specify your public development host in a file called `.env.development` in the root of your project:
+Чтобы обойти это, вы можете указать свой общедоступный хост разработки в файле с именем `.env.development` в корне вашего проекта:
 
 ```
 HOST=mypublicdevhost.com
 ```
 
-If you restart the development server now and load the app from the specified host, it should work.
+Если вы сейчас перезапустите сервер разработки и загрузите приложение с указанного хоста, оно должно работать.
 
-If you are still having issues or if you’re using a more exotic environment like a cloud editor, you can bypass the host check completely by adding a line to `.env.development.local`. **Note that this is dangerous and exposes your machine to remote code execution from malicious websites:**
+Если у вас все еще есть проблемы или вы используете более экзотическую среду, например облачный редактор, вы можете полностью обойти проверку хоста, добавив строку в `.env.development.local`. 
+**Обратите внимание, что это опасно и подвергает ваш компьютер удаленному выполнению кода с вредоносных веб-сайтов:**
 
 ```
-# NOTE: THIS IS DANGEROUS!
-# It exposes your machine to attacks from the websites you visit.
+# ПРИМЕЧАНИЕ: ЭТО ОПАСНО!
+# Он подвергает вашу машину атакам с посещаемых вами веб-сайтов.
 DANGEROUSLY_DISABLE_HOST_CHECK=true
 ```
 
-We don’t recommend this approach.
+Мы не рекомендуем такой подход.
 
 ### Configuring the Proxy Manually
 
->Note: this feature is available with `react-scripts@1.0.0` and higher.
+>Примечание: эта функция доступна в `react-scripts@1.0.0` и выше.
 
-If the `proxy` option is **not** flexible enough for you, you can specify an object in the following form (in `package.json`).<br>
-You may also specify any configuration value [`http-proxy-middleware`](https://github.com/chimurai/http-proxy-middleware#options) or [`http-proxy`](https://github.com/nodejitsu/node-http-proxy#options) supports.
+Если опция `proxy` **не** достаточно гибкая для вас, вы можете указать объект в следующей форме (в `package.json`).<br>
+Вы также можете указать любое значение конфигурации [`http-proxy-middleware`](https://github.com/chimurai/http-proxy-middleware#options) или [`http-proxy`](https://github.com/nodejitsu/node-http-proxy#options) поддерживает.
 ```js
 {
   // ...
@@ -1158,21 +1161,21 @@ You may also specify any configuration value [`http-proxy-middleware`](https://g
 }
 ```
 
-All requests matching this path will be proxies, no exceptions. This includes requests for `text/html`, which the standard `proxy` option does not proxy.
+Все запросы, соответствующие этому пути, будут прокси, без исключений. Это включает запросы на `text/html`, которые стандартный параметр `proxy` не прокси не выполняет.
 
-If you need to specify multiple proxies, you may do so by specifying additional entries.
-Matches are regular expressions, so that you can use a regexp to match multiple paths.
+Если вам нужно указать несколько прокси, вы можете сделать это, указав дополнительные записи.
+Совпадения - это регулярные выражения, поэтому вы можете использовать регулярное выражение для сопоставления нескольких путей.
 ```js
 {
   // ...
   "proxy": {
-    // Matches any request starting with /api
+    // Соответствует любому запросу, начинающемуся с /api
     "/api": {
       "target": "<url_1>",
       "ws": true
       // ...
     },
-    // Matches any request starting with /foo
+    // Соответствует любому запросу, начинающемуся с /foo
     "/foo": {
       "target": "<url_2>",
       "ssl": true,
@@ -1181,12 +1184,12 @@ Matches are regular expressions, so that you can use a regexp to match multiple 
       }
       // ...
     },
-    // Matches /bar/abc.html but not /bar/sub/def.html
+    // Соответствует /bar/abc.html, но не /bar/sub/def.html
     "/bar/[^/]*[.]html": {
       "target": "<url_3>",
       // ...
     },
-    // Matches /baz/abc.html and /baz/sub/def.html
+    // Соответствует /baz/abc.html и /baz/sub/def.html
     "/baz/.*/.*[.]html": {
       "target": "<url_4>"
       // ...
@@ -1198,25 +1201,25 @@ Matches are regular expressions, so that you can use a regexp to match multiple 
 
 ### Configuring a WebSocket Proxy
 
-When setting up a WebSocket proxy, there are a some extra considerations to be aware of.
+При настройке прокси-сервера WebSocket необходимо учитывать некоторые дополнительные соображения.
 
-If you’re using a WebSocket engine like [Socket.io](https://socket.io/), you must have a Socket.io server running that you can use as the proxy target. Socket.io will not work with a standard WebSocket server. Specifically, don't expect Socket.io to work with [the websocket.org echo test](http://websocket.org/echo.html).
+Если вы используете механизм WebSocket, например [Socket.io](https://socket.io/), у вас должен быть запущен сервер Socket.io, который можно использовать в качестве цели прокси. Socket.io не будет работать со стандартным сервером WebSocket. В частности, не ожидайте, что Socket.io будет работать с [эхо-тест websocket.org](http://websocket.org/echo.html).
 
-There’s some good documentation available for [setting up a Socket.io server](https://socket.io/docs/).
+Есть хорошая документация по [настройке сервера Socket.io](https://socket.io/docs/).
 
-Standard WebSockets **will** work with a standard WebSocket server as well as the websocket.org echo test. You can use libraries like [ws](https://github.com/websockets/ws) for the server, with [native WebSockets in the browser](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket).
+Стандартные WebSockets ** будут ** работать со стандартным сервером WebSocket, а также с эхо-тестом websocket.org. Вы можете использовать библиотеки, такие как [ws](https://github.com/websockets/ws) для сервера, с [родными WebSockets в браузере](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket).
 
-Either way, you can proxy WebSocket requests manually in `package.json`:
+В любом случае вы можете вручную проксировать запросы WebSocket в `package.json`:
 
 ```js
 {
   // ...
   "proxy": {
     "/socket": {
-      // Your compatible WebSocket server
+      // Ваш совместимый сервер WebSocket
       "target": "ws://<socket_url>",
-      // Tell http-proxy-middleware that this is a WebSocket proxy.
-      // Also allows you to proxy WebSocket requests without an additional HTTP request
+      // Сообщите http-proxy-middleware, что это прокси WebSocket.
+      // Также позволяет проксировать запросы WebSocket без дополнительного HTTP-запроса.
       // https://github.com/chimurai/http-proxy-middleware#external-websocket-upgrade
       "ws": true
       // ...
@@ -1228,11 +1231,11 @@ Either way, you can proxy WebSocket requests manually in `package.json`:
 
 ## Using HTTPS in Development
 
->Note: this feature is available with `react-scripts@0.4.0` and higher.
+>Примечание: эта функция доступна в `react-scripts@0.4.0` и выше.
 
-You may require the dev server to serve pages over HTTPS. One particular case where this could be useful is when using [the "proxy" feature](#proxying-api-requests-in-development) to proxy requests to an API server when that API server is itself serving HTTPS.
+Вам может потребоваться, чтобы сервер разработки обслуживал страницы по HTTPS. Одним из конкретных случаев, когда это может быть полезно, является использование [функции «прокси»](#proxying-api-requests-in-development) для прокси-запросов к серверу API, когда этот сервер API сам обслуживает HTTPS.
 
-To do this, set the `HTTPS` environment variable to `true`, then start the dev server as usual with `npm start`:
+Для этого установите для переменной среды `HTTPS` значение `true`, затем запустите сервер разработки, как обычно, с помощью `npm start`:
 
 #### Windows (cmd.exe)
 
@@ -1246,7 +1249,7 @@ set HTTPS=true&&npm start
 ($env:HTTPS = $true) -and (npm start)
 ```
 
-(Note: the lack of whitespace is intentional.)
+(Примечание: отсутствие пробелов намеренно.)
 
 #### Linux, macOS (Bash)
 
@@ -1254,11 +1257,12 @@ set HTTPS=true&&npm start
 HTTPS=true npm start
 ```
 
-Note that the server will use a self-signed certificate, so your web browser will almost definitely display a warning upon accessing the page.
+Обратите внимание, что сервер будет использовать самозаверяющий сертификат, поэтому ваш веб-браузер почти наверняка отобразит предупреждение при доступе к странице.
 
 ## Generating Dynamic `<meta>` Tags on the Server
 
-Since Create React App doesn’t support server rendering, you might be wondering how to make `<meta>` tags dynamic and reflect the current URL. To solve this, we recommend to add placeholders into the HTML, like this:
+Поскольку приложение Create React не поддерживает рендеринг на сервере, вам может быть интересно, как сделать теги `<meta>` динамическими и отражать текущий URL. 
+Чтобы решить эту проблему, мы рекомендуем добавлять заполнители в HTML, например:
 
 ```html
 <!doctype html>
@@ -1268,23 +1272,23 @@ Since Create React App doesn’t support server rendering, you might be wonderin
     <meta property="og:description" content="__OG_DESCRIPTION__">
 ```
 
-Then, on the server, regardless of the backend you use, you can read `index.html` into memory and replace `__OG_TITLE__`, `__OG_DESCRIPTION__`, and any other placeholders with values depending on the current URL. Just make sure to sanitize and escape the interpolated values so that they are safe to embed into HTML!
+Затем на сервере, независимо от используемого вами бэкенда, вы можете прочитать `index.html` в память и заменить `__OG_TITLE__`, `__OG_DESCRIPTION__` и любые другие заполнители значениями, зависящими от текущего URL. Просто не забудьте очистить и экранировать интерполированные значения, чтобы их можно было безопасно встраивать в HTML!
 
-If you use a Node server, you can even share the route matching logic between the client and the server. However duplicating it also works fine in simple cases.
+Если вы используете сервер Node, вы даже можете совместно использовать логику сопоставления маршрутов между клиентом и сервером. Однако его дублирование также отлично работает и в простых случаях.
 
 ## Pre-Rendering into Static HTML Files
 
-If you’re hosting your `build` with a static hosting provider you can use [react-snapshot](https://www.npmjs.com/package/react-snapshot) or [react-snap](https://github.com/stereobooster/react-snap) to generate HTML pages for each route, or relative link, in your application. These pages will then seamlessly become active, or “hydrated”, when the JavaScript bundle has loaded.
+Если вы размещаете свою сборку у статического хостинг-провайдера, вы можете использовать [react-snapshot](https://www.npmjs.com/package/react-snapshot) или [react-snap](https://github.com/stereobooster/react-snap) для создания HTML-страниц для каждого маршрута или относительной ссылки в вашем приложении. Эти страницы затем станут активными или «гидратированными» после загрузки пакета JavaScript.
 
-There are also opportunities to use this outside of static hosting, to take the pressure off the server when generating and caching routes.
+Есть также возможности использовать это вне статического хостинга, чтобы снять нагрузку с сервера при создании и кэшировании маршрутов.
 
-The primary benefit of pre-rendering is that you get the core content of each page _with_ the HTML payload—regardless of whether or not your JavaScript bundle successfully downloads. It also increases the likelihood that each route of your application will be picked up by search engines.
+Основным преимуществом предварительного рендеринга является то, что вы получаете основное содержимое каждой страницы _с_ полезными данными HTML - независимо от того, успешно ли загружается ваш пакет JavaScript. Это также увеличивает вероятность того, что каждый маршрут вашего приложения будет обнаружен поисковыми системами.
 
-You can read more about [zero-configuration pre-rendering (also called snapshotting) here](https://medium.com/superhighfives/an-almost-static-stack-6df0a2791319).
+Вы можете узнать больше о [предварительной визуализации с нулевой конфигурацией (также называемой моментальным снимком) здесь](https://medium.com/superhighfives/an-almost-static-stack-6df0a2791319).
 
 ## Injecting Data from the Server into the Page
 
-Similarly to the previous section, you can leave some placeholders in the HTML that inject global variables, for example:
+Как и в предыдущем разделе, вы можете оставить в HTML несколько заполнителей, которые вводят глобальные переменные, например:
 
 ```js
 <!doctype html>
@@ -1296,53 +1300,54 @@ Similarly to the previous section, you can leave some placeholders in the HTML t
 ```
 
 Then, on the server, you can replace `__SERVER_DATA__` with a JSON of real data right before sending the response. The client code can then read `window.SERVER_DATA` to use it. **Make sure to [sanitize the JSON before sending it to the client](https://medium.com/node-security/the-most-common-xss-vulnerability-in-react-js-applications-2bdffbcc1fa0) as it makes your app vulnerable to XSS attacks.**
+Затем на сервере вы можете заменить `__SERVER_DATA__` на JSON реальных данных прямо перед отправкой ответа. Затем клиентский код может прочитать `window.SERVER_DATA`, чтобы использовать его. **Обязательно [очистите JSON перед его отправкой клиенту](https://medium.com/node-security/the-most-common-xss-vulnerability-in-react-js-applications-2bdffbcc1fa0) поскольку он делает ваше приложение уязвимым для XSS-атак.**
 
 ## Running Tests
 
->Note: this feature is available with `react-scripts@0.3.0` and higher.<br>
->[Read the migration guide to learn how to enable it in older projects!](https://github.com/facebookincubator/create-react-app/blob/master/CHANGELOG.md#migrating-from-023-to-030)
+> Примечание: эта функция доступна в `react-scripts@0.3.0` и выше. <br>
+> [Прочтите руководство по миграции, чтобы узнать, как включить его в старых проектах!](https://github.com/facebookincubator/create-react-app/blob/master/CHANGELOG.md#migrating-from-023-to-030)
 
-Create React App uses [Jest](https://facebook.github.io/jest/) as its test runner. To prepare for this integration, we did a [major revamp](https://facebook.github.io/jest/blog/2016/09/01/jest-15.html) of Jest so if you heard bad things about it years ago, give it another try.
+Приложение Create React использует [Jest](https://facebook.github.io/jest/) в качестве средства запуска тестов. Чтобы подготовиться к этой интеграции, мы провели [серьезную переработку](https://facebook.github.io/jest/blog/2016/09/01/jest-15.html) Jest, поэтому, если вы слышали об этом плохие отзывы много лет назад, попробуйте ещё раз.
 
-Jest is a Node-based runner. This means that the tests always run in a Node environment and not in a real browser. This lets us enable fast iteration speed and prevent flakiness.
+Jest - это раннер на основе узлов. Это означает, что тесты всегда выполняются в среде Node, а не в реальном браузере. Это позволяет нам обеспечить высокую скорость итераций и предотвратить нестабильность.
 
-While Jest provides browser globals such as `window` thanks to [jsdom](https://github.com/tmpvar/jsdom), they are only approximations of the real browser behavior. Jest is intended to be used for unit tests of your logic and your components rather than the DOM quirks.
+Хотя Jest предоставляет глобальные переменные браузера, такие как `window`, благодаря [jsdom](https://github.com/tmpvar/jsdom), они являются лишь приближением реального поведения браузера. Jest предназначен для модульных тестов вашей логики и компонентов, а не для причуд DOM.
 
-We recommend that you use a separate tool for browser end-to-end tests if you need them. They are beyond the scope of Create React App.
+Мы рекомендуем вам использовать отдельный инструмент для сквозных тестов браузера, если они вам нужны. Они выходят за рамки приложения Create React.
 
 ### Filename Conventions
 
-Jest will look for test files with any of the following popular naming conventions:
+Jest будет искать тестовые файлы с любым из следующих популярных соглашений об именах:
 
-* Files with `.js` suffix in `__tests__` folders.
-* Files with `.test.js` suffix.
-* Files with `.spec.js` suffix.
+* Файлы с суффиксом `.js` в папках `__tests__`.
+* Файлы с суффиксом `.test.js`.
+* Файлы с суффиксом `.spec.js`.
 
-The `.test.js` / `.spec.js` files (or the `__tests__` folders) can be located at any depth under the `src` top level folder.
+Файлы `.test.js` / `.spec.js` (или папки `__tests__`) могут быть расположены на любой глубине в папке верхнего уровня `src`.
 
-We recommend to put the test files (or `__tests__` folders) next to the code they are testing so that relative imports appear shorter. For example, if `App.test.js` and `App.js` are in the same folder, the test just needs to `import App from './App'` instead of a long relative path. Colocation also helps find tests more quickly in larger projects.
+Мы рекомендуем помещать тестовые файлы (или папки `__tests__`) рядом с кодом, который они тестируют, чтобы относительный импорт казался короче. Например, если `App.test.js` и `App.js` находятся в одной папке, тесту просто нужно `импортировать приложение из './App'` вместо длинного относительного пути. Совместное размещение также помогает быстрее находить тесты в более крупных проектах.
 
 ### Command Line Interface
 
-When you run `npm test`, Jest will launch in the watch mode. Every time you save a file, it will re-run the tests, just like `npm start` recompiles the code.
+Когда вы запускаете `npm test`, Jest запускается в режиме часов. Каждый раз, когда вы сохраняете файл, он будет повторно запускать тесты, так же как `npm start` перекомпилирует код.
 
-The watcher includes an interactive command-line interface with the ability to run all tests, or focus on a search pattern. It is designed this way so that you can keep it open and enjoy fast re-runs. You can learn the commands from the “Watch Usage” note that the watcher prints after every run:
+Наблюдатель включает интерактивный интерфейс командной строки с возможностью запускать все тесты или фокусироваться на шаблоне поиска. Он разработан таким образом, чтобы вы могли держать его открытым и наслаждаться быстрым повторным запуском. Вы можете узнать команды из заметки «Наблюдать за использованием», которую наблюдатель печатает после каждого запуска:
 
-![Jest watch mode](http://facebook.github.io/jest/img/blog/15-watch.gif)
+![Режим часов Jest](http://facebook.github.io/jest/img/blog/15-watch.gif)
 
 ### Version Control Integration
 
-By default, when you run `npm test`, Jest will only run the tests related to files changed since the last commit. This is an optimization designed to make your tests run fast regardless of how many tests you have. However it assumes that you don’t often commit the code that doesn’t pass the tests.
+По умолчанию, когда вы запускаете `npm test`, Jest запускает только тесты, относящиеся к файлам, измененным с момента последней фиксации. Это оптимизация, призванная ускорить выполнение ваших тестов независимо от того, сколько у вас тестов. Однако предполагается, что вы не часто фиксируете код, не прошедший тесты.
 
-Jest will always explicitly mention that it only ran tests related to the files changed since the last commit. You can also press `a` in the watch mode to force Jest to run all tests.
+Jest всегда явно упоминает, что он запускал только тесты, связанные с файлами, измененными с момента последней фиксации. Вы также можете нажать `a` в режиме просмотра, чтобы Jest запускал все тесты.
 
-Jest will always run all tests on a [continuous integration](#continuous-integration) server or if the project is not inside a Git or Mercurial repository.
+Jest всегда будет запускать все тесты на сервере [непрерывной интеграции](#continuous-integration) или если проект не находится внутри репозитория Git или Mercurial.
 
 ### Writing Tests
 
-To create tests, add `it()` (or `test()`) blocks with the name of the test and its code. You may optionally wrap them in `describe()` blocks for logical grouping but this is neither required nor recommended.
+Для создания тестов добавьте блоки `it()` (или `test()`) с именем теста и его кодом. Вы можете при желании заключить их в блоки `describe()` для логической группировки, но это не требуется и не рекомендуется.
 
-Jest provides a built-in `expect()` global function for making assertions. A basic test could look like this:
+Jest предоставляет встроенную глобальную функцию `expect()` для создания утверждений. Базовый тест может выглядеть так:
 
 ```js
 import sum from './sum';
@@ -1353,14 +1358,14 @@ it('sums numbers', () => {
 });
 ```
 
-All `expect()` matchers supported by Jest are [extensively documented here](https://facebook.github.io/jest/docs/en/expect.html#content).<br>
-You can also use [`jest.fn()` and `expect(fn).toBeCalled()`](https://facebook.github.io/jest/docs/en/expect.html#tohavebeencalled) to create “spies” or mock functions.
+Все сопоставители `expect()`, поддерживаемые Jest, [подробно описаны здесь](https://facebook.github.io/jest/docs/en/expect.html#content).<br>
+Вы также можете использовать [`jest.fn()` и `expect(fn).toBeCalled()`](https://facebook.github.io/jest/docs/en/expect.html#tohavebeencalled) для создания «шпионов» или имитаторов функции.
 
 ### Testing Components
 
-There is a broad spectrum of component testing techniques. They range from a “smoke test” verifying that a component renders without throwing, to shallow rendering and testing some of the output, to full rendering and testing component lifecycle and state changes.
+Существует широкий спектр методов тестирования компонентов. Они варьируются от «дымового теста», подтверждающего, что компонент отображается без выброса, до поверхностного рендеринга и тестирования некоторых выходных данных, до полного рендеринга и тестирования жизненного цикла компонента и изменений состояния.
 
-Different projects choose different testing tradeoffs based on how often components change, and how much logic they contain. If you haven’t decided on a testing strategy yet, we recommend that you start with creating simple smoke tests for your components:
+В разных проектах выбираются разные компромиссы при тестировании в зависимости от того, как часто меняются компоненты и сколько логики они содержат. Если вы еще не определились со стратегией тестирования, рекомендуем начать с создания простых дымовых тестов для ваших компонентов:
 
 ```js
 import React from 'react';
@@ -1373,25 +1378,25 @@ it('renders without crashing', () => {
 });
 ```
 
-This test mounts a component and makes sure that it didn’t throw during rendering. Tests like this provide a lot of value with very little effort so they are great as a starting point, and this is the test you will find in `src/App.test.js`.
+Этот тест монтирует компонент и проверяет, не сработал ли он во время рендеринга. Подобные тесты приносят большую пользу при минимальных усилиях, поэтому они отлично подходят в качестве отправной точки, и этот тест вы найдете в `src/App.test.js`.
 
-When you encounter bugs caused by changing components, you will gain a deeper insight into which parts of them are worth testing in your application. This might be a good time to introduce more specific tests asserting specific expected output or behavior.
+Когда вы столкнетесь с ошибками, вызванными изменением компонентов, вы получите более глубокое понимание того, какие из них стоит протестировать в вашем приложении. Возможно, сейчас самое время представить более конкретные тесты, подтверждающие конкретный ожидаемый результат или поведение.
 
-If you’d like to test components in isolation from the child components they render, we recommend using [`shallow()` rendering API](http://airbnb.io/enzyme/docs/api/shallow.html) from [Enzyme](http://airbnb.io/enzyme/). To install it, run:
+Если вы хотите протестировать компоненты отдельно от дочерних компонентов, которые они отображают, мы рекомендуем использовать [`shallow()` API рендеринга](http://airbnb.io/enzyme/docs/api/shallow.html) из [Фермент](http://airbnb.io/enzyme/). Чтобы установить его, запустите:
 
 ```sh
 npm install --save enzyme enzyme-adapter-react-16 react-test-renderer
 ```
 
-Alternatively you may use `yarn`:
+В качестве альтернативы вы можете использовать `yarn`:
 
 ```sh
 yarn add enzyme enzyme-adapter-react-16 react-test-renderer
 ```
 
-As of Enzyme 3, you will need to install Enzyme along with an Adapter corresponding to the version of React you are using. (The examples above use the adapter for React 16.)
+Начиная с Enzyme 3, вам нужно будет установить Enzyme вместе с адаптером, соответствующим используемой вами версии React. (В приведенных выше примерах используется адаптер для React 16.)
 
-The adapter will also need to be configured in your [global setup file](#initializing-test-environment):
+Адаптер также необходимо настроить в вашем [файле глобальной настройки](#initializing-test-environment):
 
 #### `src/setupTests.js`
 ```js
@@ -1402,8 +1407,8 @@ configure({ adapter: new Adapter() });
 ```
 
 >Note: Keep in mind that if you decide to "eject" before creating `src/setupTests.js`, the resulting `package.json` file won't contain any reference to it. [Read here](#initializing-test-environment) to learn how to add this after ejecting.
-
-Now you can write a smoke test with it:
+>Примечание: имейте в виду, что если вы решите «извлечь» перед созданием `src/setupTests.js`, полученный файл `package.json` не будет содержать на него никаких ссылок. [Прочтите здесь](#initializing-test-environment), чтобы узнать, как добавить это после извлечения.
+Теперь вы можете написать с ним дымовой тест:
 
 ```js
 import React from 'react';
@@ -1415,11 +1420,11 @@ it('renders without crashing', () => {
 });
 ```
 
-Unlike the previous smoke test using `ReactDOM.render()`, this test only renders `<App>` and doesn’t go deeper. For example, even if `<App>` itself renders a `<Button>` that throws, this test will pass. Shallow rendering is great for isolated unit tests, but you may still want to create some full rendering tests to ensure the components integrate correctly. Enzyme supports [full rendering with `mount()`](http://airbnb.io/enzyme/docs/api/mount.html), and you can also use it for testing state changes and component lifecycle.
+В отличие от предыдущего дымового теста с использованием `ReactDOM.render()`, этот тест отображает только `<App>` и не углубляется. Например, даже если `<App>` сам отображает `<Button>`, который выдает, этот тест будет пройден. Неглубокий рендеринг отлично подходит для изолированных модульных тестов, но вы все равно можете создать несколько полных тестов рендеринга, чтобы гарантировать правильную интеграцию компонентов. Enzyme поддерживает [полный рендеринг с помощью `mount()`](http://airbnb.io/enzyme/docs/api/mount.html), и вы также можете использовать его для тестирования изменений состояния и жизненного цикла компонентов.
 
-You can read the [Enzyme documentation](http://airbnb.io/enzyme/) for more testing techniques. Enzyme documentation uses Chai and Sinon for assertions but you don’t have to use them because Jest provides built-in `expect()` and `jest.fn()` for spies.
+Вы можете прочитать [Документацию по ферментам](http://airbnb.io/enzyme/), чтобы узнать о других методах тестирования. В документации по Enzyme для утверждений используются Chai и Sinon, но вам не обязательно их использовать, потому что Jest предоставляет встроенные функции `expect()` и `jest.fn()` для шпионов.
 
-Here is an example from Enzyme documentation that asserts specific output, rewritten to use Jest matchers:
+Вот пример из документации Enzyme, который утверждает конкретный вывод, переписанный для использования сопоставителей Jest:
 
 ```js
 import React from 'react';
@@ -1428,34 +1433,35 @@ import App from './App';
 
 it('renders welcome message', () => {
   const wrapper = shallow(<App />);
-  const welcome = <h2>Welcome to React</h2>;
+  const welcome = <h2>Добро пожаловать в React</h2>;
   // expect(wrapper.contains(welcome)).to.equal(true);
   expect(wrapper.contains(welcome)).toEqual(true);
 });
 ```
 
-All Jest matchers are [extensively documented here](http://facebook.github.io/jest/docs/en/expect.html).<br>
-Nevertheless you can use a third-party assertion library like [Chai](http://chaijs.com/) if you want to, as described below.
+Все сопоставители Jest [подробно описаны здесь](http://facebook.github.io/jest/docs/en/expect.html).<br>
+Тем не менее, вы можете использовать стороннюю библиотеку утверждений, такую ​​как [Chai](http://chaijs.com/), если хотите, как описано ниже.
 
 Additionally, you might find [jest-enzyme](https://github.com/blainekasten/enzyme-matchers) helpful to simplify your tests with readable matchers. The above `contains` code can be written more simply with jest-enzyme.
+Кроме того, вы можете найти [jest-enzyme](https://github.com/blainekasten/enzyme-matchers) полезным для упрощения ваших тестов с помощью удобочитаемых сопоставителей. Вышеупомянутый код `contains` можно написать более просто с помощью jest-enzyme.
 
 ```js
 expect(wrapper).toContainReact(welcome)
 ```
 
-To enable this, install `jest-enzyme`:
+Чтобы включить это, установите `jest-enzyme`:
 
 ```sh
 npm install --save jest-enzyme
 ```
 
-Alternatively you may use `yarn`:
+В качестве альтернативы вы можете использовать `yarn`:
 
 ```sh
 yarn add jest-enzyme
 ```
 
-Import it in [`src/setupTests.js`](#initializing-test-environment) to make its matchers available in every test:
+Импортируйте его в [`src/setupTests.js`](#initializing-test-environment), чтобы сделать его сопоставители доступными в каждом тесте:
 
 ```js
 import 'jest-enzyme';
@@ -1463,24 +1469,25 @@ import 'jest-enzyme';
 
 ### Using Third Party Assertion Libraries
 
-We recommend that you use `expect()` for assertions and `jest.fn()` for spies. If you are having issues with them please [file those against Jest](https://github.com/facebook/jest/issues/new), and we’ll fix them. We intend to keep making them better for React, supporting, for example, [pretty-printing React elements as JSX](https://github.com/facebook/jest/pull/1566).
+Мы рекомендуем вам использовать `expect()` для утверждений и `jest.fn()` для шпионов. Если у вас возникли проблемы с ними, пожалуйста, [подавите их против Jest](https://github.com/facebook/jest/issues/new), и мы их исправим. Мы намерены и дальше улучшать их для React, поддерживая, например, [красивую печать элементов React как JSX](https://github.com/facebook/jest/pull/1566).
 
 However, if you are used to other libraries, such as [Chai](http://chaijs.com/) and [Sinon](http://sinonjs.org/), or if you have existing code using them that you’d like to port over, you can import them normally like this:
+Однако, если вы привыкли к другим библиотекам, таким как [Chai](http://chaijs.com/) и [Sinon](http://sinonjs.org/), или если у вас есть существующий код, использующий их, вы хотите перенести, вы можете импортировать их обычно следующим образом:
 
 ```js
 import sinon from 'sinon';
 import { expect } from 'chai';
 ```
 
-and then use them in your tests like you normally do.
+а затем используйте их в своих тестах, как обычно.
 
 ### Initializing Test Environment
 
->Note: this feature is available with `react-scripts@0.4.0` and higher.
+> Примечание: эта функция доступна в `react-scripts@0.4.0` и выше.
 
-If your app uses a browser API that you need to mock in your tests or if you just need a global setup before running your tests, add a `src/setupTests.js` to your project. It will be automatically executed before running your tests.
+Если ваше приложение использует API-интерфейс браузера, который вам нужно имитировать в своих тестах, или если вам просто нужна глобальная настройка перед запуском тестов, добавьте в свой проект файл `src/setupTests.js`. Он будет автоматически выполнен перед запуском ваших тестов.
 
-For example:
+Например:
 
 #### `src/setupTests.js`
 ```js
@@ -1492,7 +1499,7 @@ const localStorageMock = {
 global.localStorage = localStorageMock
 ```
 
->Note: Keep in mind that if you decide to "eject" before creating `src/setupTests.js`, the resulting `package.json` file won't contain any reference to it, so you should manually create the property `setupTestFrameworkScriptFile` in the configuration for Jest, something like the following:
+>Примечание: имейте в виду, что если вы решите «извлечь» перед созданием `src/setupTests.js`, полученный файл `package.json` не будет содержать ссылки на него, поэтому вам следует вручную создать свойство `setupTestFrameworkScriptFile` в конфигурации для Jest примерно следующее:
 
 >```js
 >"jest": {
@@ -1503,29 +1510,29 @@ global.localStorage = localStorageMock
 
 ### Focusing and Excluding Tests
 
-You can replace `it()` with `xit()` to temporarily exclude a test from being executed.<br>
-Similarly, `fit()` lets you focus on a specific test without running any other tests.
+Вы можете заменить `it()` на `xit()`, чтобы временно исключить выполнение теста.<br>
+Точно так же `fit()` позволяет вам сосредоточиться на конкретном тесте без запуска каких-либо других тестов.
 
 ### Coverage Reporting
 
-Jest has an integrated coverage reporter that works well with ES6 and requires no configuration.<br>
-Run `npm test -- --coverage` (note extra `--` in the middle) to include a coverage report like this:
+Jest имеет встроенный репортер покрытия, который хорошо работает с ES6 и не требует настройки. <br>
+Запустите `npm test -- --coverage` (обратите внимание на дополнительный `--` посередине), чтобы включить такой отчет о покрытии:
 
-![coverage report](http://i.imgur.com/5bFhnTS.png)
+![отчёт о покрытии](http://i.imgur.com/5bFhnTS.png)
 
-Note that tests run much slower with coverage so it is recommended to run it separately from your normal workflow.
+Обратите внимание, что тесты выполняются намного медленнее с покрытием, поэтому рекомендуется запускать его отдельно от обычного рабочего процесса.
 
 #### Configuration
 
-The default Jest coverage configuration can be overriden by adding any of the following supported keys to a Jest config in your package.json.
+Конфигурацию покрытия Jest по умолчанию можно изменить, добавив любой из следующих поддерживаемых ключей в конфигурацию Jest в вашем package.json.
 
-Supported overrides:
+Поддерживаемые переопределения:
  - [`collectCoverageFrom`](https://facebook.github.io/jest/docs/en/configuration.html#collectcoveragefrom-array)
  - [`coverageReporters`](https://facebook.github.io/jest/docs/en/configuration.html#coveragereporters-array-string)
  - [`coverageThreshold`](https://facebook.github.io/jest/docs/en/configuration.html#coveragethreshold-object)
  - [`snapshotSerializers`](https://facebook.github.io/jest/docs/en/configuration.html#snapshotserializers-array-string)
 
-Example package.json:
+Пример package.json:
 
 ```json
 {
@@ -1552,17 +1559,17 @@ Example package.json:
 
 ### Continuous Integration
 
-By default `npm test` runs the watcher with interactive CLI. However, you can force it to run tests once and finish the process by setting an environment variable called `CI`.
+По умолчанию npm test запускает наблюдатель с интерактивным интерфейсом командной строки. Однако вы можете принудительно запустить тесты один раз и завершить процесс, установив переменную среды с именем `CI`.
 
-When creating a build of your application with `npm run build` linter warnings are not checked by default. Like `npm test`, you can force the build to perform a linter warning check by setting the environment variable `CI`. If any warnings are encountered then the build fails.
+При создании сборки вашего приложения с помощью `npm run build` предупреждения линтера по умолчанию не проверяются. Как и `npm test`, вы можете заставить сборку выполнять проверку предупреждений линтера, установив переменную среды `CI`. Если возникают какие-либо предупреждения, сборка завершается ошибкой.
 
-Popular CI servers already set the environment variable `CI` by default but you can do this yourself too:
+Популярные CI-серверы уже устанавливают переменную окружения `CI` по умолчанию, но вы тоже можете сделать это самостоятельно:
 
 ### On CI servers
 #### Travis CI
 
-1. Following the [Travis Getting started](https://docs.travis-ci.com/user/getting-started/) guide for syncing your GitHub repository with Travis.  You may need to initialize some settings manually in your [profile](https://travis-ci.org/profile) page.
-1. Add a `.travis.yml` file to your git repository.
+1. Следуя руководству [Начало работы с Трэвисом](https://docs.travis-ci.com/user/getting-started/) по синхронизации репозитория GitHub с Трэвисом. Возможно, вам придется вручную инициализировать некоторые настройки на странице вашего [профиля](https://travis-ci.org/profile).
+1. Добавьте файл `.travis.yml` в свой репозиторий git.
 ```
 language: node_js
 node_js:
@@ -1574,12 +1581,13 @@ script:
   - npm run build
   - npm test
 ```
-1. Trigger your first build with a git push.
-1. [Customize your Travis CI Build](https://docs.travis-ci.com/user/customizing-the-build/) if needed.
+1. Запустите первую сборку с помощью git push.
+1. [Настройте свою сборку Travis CI](https://docs.travis-ci.com/user/customizing-the-build/) если нужно.
 
 #### CircleCI
 
 Follow [this article](https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1) to set up CircleCI with a Create React App project.
+Следуйте [этой статье](https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1), чтобы настроить CircleCI с проектом Create React App.
 
 ### On your own environment
 ##### Windows (cmd.exe)
@@ -1592,7 +1600,7 @@ set CI=true&&npm test
 set CI=true&&npm run build
 ```
 
-(Note: the lack of whitespace is intentional.)
+(Примечание: отсутствие пробелов намеренно.)
 
 ##### Windows (Powershell)
 
@@ -1614,15 +1622,16 @@ CI=true npm test
 CI=true npm run build
 ```
 
-The test command will force Jest to run tests once instead of launching the watcher.
+Команда test заставит Jest запустить тесты один раз вместо запуска наблюдателя.
 
 >  If you find yourself doing this often in development, please [file an issue](https://github.com/facebookincubator/create-react-app/issues/new) to tell us about your use case because we want to make watcher the best experience and are open to changing how it works to accommodate more workflows.
+> Если вы часто делаете это в процессе разработки, пожалуйста [сообщите о проблеме](https://github.com/facebookincubator/create-react-app/issues/new), чтобы рассказать нам о своем варианте использования, потому что мы хотим сделать наблюдение за лучшим опытом и готовы изменить его работу, чтобы приспособить больше рабочих процессов.
 
-The build command will check for linter warnings and fail if any are found.
+Команда сборки проверит предупреждения линтера и завершится ошибкой, если они будут обнаружены.
 
 ### Disabling jsdom
 
-By default, the `package.json` of the generated project looks like this:
+По умолчанию `package.json` сгенерированного проекта выглядит так:
 
 ```js
   "scripts": {
@@ -1632,6 +1641,7 @@ By default, the `package.json` of the generated project looks like this:
 ```
 
 If you know that none of your tests depend on [jsdom](https://github.com/tmpvar/jsdom), you can safely remove `--env=jsdom`, and your tests will run faster:
+Если вы знаете, что ни один из ваших тестов не зависит от [jsdom](https://github.com/tmpvar/jsdom), вы можете безопасно удалить `--env=jsdom`, и ваши тесты будут работать быстрее:
 
 ```diff
   "scripts": {
@@ -1641,65 +1651,65 @@ If you know that none of your tests depend on [jsdom](https://github.com/tmpvar/
 +   "test": "react-scripts test"
 ```
 
-To help you make up your mind, here is a list of APIs that **need jsdom**:
+Чтобы помочь вам принять решение, вот список API, которым **нужен jsdom**:
 
-* Any browser globals like `window` and `document`
+* Любые глобальные файлы браузера, такие как `window` и `document`
 * [`ReactDOM.render()`](https://facebook.github.io/react/docs/top-level-api.html#reactdom.render)
-* [`TestUtils.renderIntoDocument()`](https://facebook.github.io/react/docs/test-utils.html#renderintodocument) ([a shortcut](https://github.com/facebook/react/blob/34761cf9a252964abfaab6faf74d473ad95d1f21/src/test/ReactTestUtils.js#L83-L91) for the above)
-* [`mount()`](http://airbnb.io/enzyme/docs/api/mount.html) in [Enzyme](http://airbnb.io/enzyme/index.html)
+* [`TestUtils.renderIntoDocument()`](https://facebook.github.io/react/docs/test-utils.html#renderintodocument) ([ярлык](https://github.com/facebook/react/blob/34761cf9a252964abfaab6faf74d473ad95d1f21/src/test/ReactTestUtils.js#L83-L91) для вышеуказанного)
+* [`mount()`](http://airbnb.io/enzyme/docs/api/mount.html) в [Enzyme](http://airbnb.io/enzyme/index.html)
 
-In contrast, **jsdom is not needed** for the following APIs:
+Напротив, **jsdom не требуется** для следующих API:
 
-* [`TestUtils.createRenderer()`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) (shallow rendering)
-* [`shallow()`](http://airbnb.io/enzyme/docs/api/shallow.html) in [Enzyme](http://airbnb.io/enzyme/index.html)
+* [`TestUtils.createRenderer()`](https://facebook.github.io/react/docs/test-utils.html#shallow-rendering) (неглубокий рендеринг)
+* [`shallow()`](http://airbnb.io/enzyme/docs/api/shallow.html) в [Enzyme](http://airbnb.io/enzyme/index.html)
 
-Finally, jsdom is also not needed for [snapshot testing](http://facebook.github.io/jest/blog/2016/07/27/jest-14.html).
+Наконец, jsdom также не нужен для [тестирования снимков](http://facebook.github.io/jest/blog/2016/07/27/jest-14.html).
 
 ### Snapshot Testing
 
-Snapshot testing is a feature of Jest that automatically generates text snapshots of your components and saves them on the disk so if the UI output changes, you get notified without manually writing any assertions on the component output. [Read more about snapshot testing.](http://facebook.github.io/jest/blog/2016/07/27/jest-14.html)
+Тестирование моментальных снимков - это функция Jest, которая автоматически генерирует текстовые снимки ваших компонентов и сохраняет их на диске, поэтому при изменении вывода пользовательского интерфейса вы получаете уведомление, не записывая вручную никаких утверждений в выводе компонента. [Подробнее о тестировании снимков.](http://facebook.github.io/jest/blog/2016/07/27/jest-14.html)
 
 ### Editor Integration
 
-If you use [Visual Studio Code](https://code.visualstudio.com), there is a [Jest extension](https://github.com/orta/vscode-jest) which works with Create React App out of the box. This provides a lot of IDE-like features while using a text editor: showing the status of a test run with potential fail messages inline, starting and stopping the watcher automatically, and offering one-click snapshot updates.
+Если вы используете [Visual Studio Code](https://code.visualstudio.com), есть [расширение Jest](https://github.com/orta/vscode-jest), которое работает с приложением Create React из коробки. Это обеспечивает множество функций, подобных IDE, при использовании текстового редактора: отображение состояния тестового прогона с сообщениями о потенциальных сбоях в строке, автоматический запуск и остановка наблюдателя и предложение обновлений моментальных снимков одним щелчком мыши.
 
-![VS Code Jest Preview](https://cloud.githubusercontent.com/assets/49038/20795349/a032308a-b7c8-11e6-9b34-7eeac781003f.png)
+![VS Code - предпросмотр](https://cloud.githubusercontent.com/assets/49038/20795349/a032308a-b7c8-11e6-9b34-7eeac781003f.png)
 
 ## Debugging Tests
 
-There are various ways to setup a debugger for your Jest tests. We cover debugging in Chrome and [Visual Studio Code](https://code.visualstudio.com/).
+Есть разные способы настроить отладчик для ваших тестов Jest. Мы рассматриваем отладку в Chrome и [Visual Studio Code](https://code.visualstudio.com/).
 
->Note: debugging tests requires Node 8 or higher.
+>Примечание: для отладки тестов требуется Node 8 или выше.
 
 ### Debugging Tests in Chrome
 
-Add the following to the `scripts` section in your project's `package.json`
+Добавьте следующее в раздел `scripts` в вашем проекте `package.json`
 ```json
 "scripts": {
     "test:debug": "react-scripts --inspect-brk test --runInBand --env=jsdom"
   }
 ```
-Place `debugger;` statements in any test and run:
+Поместите операторы `debugger;` в любой тест и запустите:
 ```bash
 $ npm run test:debug
 ```
 
-This will start running your Jest tests, but pause before executing to allow a debugger to attach to the process.
+Это запустит ваши тесты Jest, но сделайте паузу перед выполнением, чтобы отладчик мог подключиться к процессу.
 
-Open the following in Chrome
+Откройте следующее в Chrome
 ```
 about:inspect
 ```
 
-After opening that link, the Chrome Developer Tools will be displayed. Select `inspect` on your process and a breakpoint will be set at the first line of the react script (this is done simply to give you time to open the developer tools and to prevent Jest from executing before you have time to do so). Click the button that looks like a "play" button in the upper right hand side of the screen to continue execution. When Jest executes the test that contains the debugger statement, execution will pause and you can examine the current scope and call stack.
+После перехода по этой ссылке отобразятся Инструменты разработчика Chrome. Выберите `inspect` в своем процессе, и точка останова будет установлена ​​в первой строке сценария реакции (это делается просто для того, чтобы дать вам время открыть инструменты разработчика и предотвратить выполнение Jest до того, как у вас будет время для этого). Нажмите кнопку, которая выглядит как кнопка «воспроизведения» в верхнем правом углу экрана, чтобы продолжить выполнение. Когда Jest выполняет тест, содержащий оператор отладчика, выполнение приостанавливается, и вы можете проверить текущую область видимости и стек вызовов.
 
->Note: the --runInBand cli option makes sure Jest runs test in the same process rather than spawning processes for individual tests. Normally Jest parallelizes test runs across processes but it is hard to debug many processes at the same time.
+>Примечание: параметр --runInBand cli гарантирует, что Jest запускает тест в одном процессе, а не порождает процессы для отдельных тестов. Обычно Jest распараллеливает прогоны тестов между процессами, но отлаживать несколько процессов одновременно сложно.
 
 ### Debugging Tests in Visual Studio Code
 
-Debugging Jest tests is supported out of the box for [Visual Studio Code](https://code.visualstudio.com).
+Отладка тестов Jest "из коробки" поддерживается для [Visual Studio Code](https://code.visualstudio.com).
 
-Use the following [`launch.json`](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations) configuration file:
+Используйте следующий файл конфигурации [`launch.json`](https://code.visualstudio.com/docs/editor/debugging#_launch-configurations):
 ```
 {
   "version": "0.2.0",
@@ -1726,14 +1736,14 @@ Use the following [`launch.json`](https://code.visualstudio.com/docs/editor/debu
 
 ## Developing Components in Isolation
 
-Usually, in an app, you have a lot of UI components, and each of them has many different states.
-For an example, a simple button component could have following states:
+Обычно в приложении есть много компонентов пользовательского интерфейса, и каждый из них имеет много разных состояний.
+Например, простой компонент кнопки может иметь следующие состояния:
 
-* In a regular state, with a text label.
-* In the disabled mode.
-* In a loading state.
+* В штатном состоянии с текстовой меткой.
+* В отключенном режиме.
+* В состоянии загрузки.
 
-Usually, it’s hard to see these states without running a sample app or some examples.
+Обычно эти состояния трудно увидеть, не запустив образец приложения или несколько примеров.
 
 Create React App doesn’t include any tools for this by default, but you can easily add [Storybook for React](https://storybook.js.org) ([source](https://github.com/storybooks/storybook)) or [React Styleguidist](https://react-styleguidist.js.org/) ([source](https://github.com/styleguidist/react-styleguidist)) to your project. **These are third-party tools that let you develop components and see all their states in isolation from your app**.
 
