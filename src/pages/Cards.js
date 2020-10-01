@@ -131,9 +131,7 @@ class SimpleCard extends Component {
                 </Avatar>
               }
               action={
-                <IconButton>
-                  <MoreVertIcon />
-                </IconButton>
+                <IconButton><MoreVertIcon /></IconButton>
               }
               title="Паэлья с креветками и чоризо"
               subheader="14 сентября, 2016"
@@ -149,12 +147,8 @@ class SimpleCard extends Component {
               </Typography>
             </CardContent>
             <CardActions className={classes.actions} disableActionSpacing>
-              <IconButton aria-label="Add to favorites">
-                <FavoriteIcon />
-              </IconButton>
-              <IconButton aria-label="Share">
-                <ShareIcon />
-              </IconButton>
+              <IconButton aria-label="Add to favorites"><FavoriteIcon /></IconButton>
+              <IconButton aria-label="Share"><ShareIcon /></IconButton>
               <IconButton
                 className={classnames(classes.expand, {
                   [classes.expandOpen]: this.state.expanded,
@@ -162,8 +156,7 @@ class SimpleCard extends Component {
                 onClick={this.handleExpandClick}
                 aria-expanded={this.state.expanded}
                 aria-label="Show more"
-              >
-                <ExpandMoreIcon />
+              ><ExpandMoreIcon />
               </IconButton>
             </CardActions>
             <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
@@ -198,8 +191,6 @@ class SimpleCard extends Component {
   }
 }
 
-SimpleCard.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+SimpleCard.propTypes = { classes: PropTypes.object.isRequired, };
 
 export default withStyles(styles)(SimpleCard);
