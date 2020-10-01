@@ -7,12 +7,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
 
 const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit
-  },
-  input: {
-    display: "none"
-  }
+  button: { margin: theme.spacing.unit },
+  input: { display: "none" }
 });
 
 const FlatButtons = props => {
@@ -25,24 +21,21 @@ const FlatButtons = props => {
           color="primary"
           aria-label="add"
           className={classes.button}
-        >
-          <AddIcon />
+        ><AddIcon />
         </Button>
         <Button
           variant="fab"
           color="secondary"
           aria-label="edit"
           className={classes.button}
-        >
-          <Icon>edit_icon</Icon>
+        ><Icon>edit_icon</Icon>
         </Button>
         <Button
           variant="fab"
           disabled
           aria-label="delete"
           className={classes.button}
-        >
-          <DeleteIcon />
+        ><DeleteIcon />
         </Button>
       </div>
     </div>
