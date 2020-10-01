@@ -52,15 +52,10 @@ class SimpleList extends Component {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+    if (currentIndex === -1) { newChecked.push(value);} 
+    else { newChecked.splice(currentIndex, 1);}
 
-    this.setState({
-      checked: newChecked,
-    });
+    this.setState({ checked: newChecked, });
   };
 
   render () {
@@ -72,23 +67,15 @@ class SimpleList extends Component {
           <div className={classes.listInner}>
             <List component="nav">
               <ListItem button>
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Inbox" />
-              </ListItem>
+                <ListItemIcon><InboxIcon /></ListItemIcon>
+                <ListItemText primary="Inbox" /></ListItem>
               <ListItem button>
-                <ListItemIcon>
-                  <DraftsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Drafts" />
-              </ListItem>
+                <ListItemIcon><DraftsIcon /></ListItemIcon>
+                <ListItemText primary="Drafts" /></ListItem>
             </List>
             <Divider />
             <List component="nav">
-              <ListItem button>
-                <ListItemText primary="Trash" />
-              </ListItem>
+              <ListItem button><ListItemText primary="Trash" /></ListItem>
               <ListItem button component="a" href="#simple-list">
                 <ListItemText primary="Spam" />
               </ListItem>
@@ -101,30 +88,22 @@ class SimpleList extends Component {
               subheader={<ListSubheader component="div">Вложенные листы</ListSubheader>}
             >
               <ListItem button>
-                <ListItemIcon>
-                  <SendIcon />
-                </ListItemIcon>
+                <ListItemIcon><SendIcon /></ListItemIcon>
                 <ListItemText inset primary="Sent mail" />
               </ListItem>
               <ListItem button>
-                <ListItemIcon>
-                  <DraftsIcon />
-                </ListItemIcon>
+                <ListItemIcon><DraftsIcon /></ListItemIcon>
                 <ListItemText inset primary="Drafts" />
               </ListItem>
               <ListItem button onClick={this.handleClick}>
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
+                <ListItemIcon><InboxIcon /></ListItemIcon>
                 <ListItemText inset primary="Inbox" />
                 {this.state.open ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
               <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   <ListItem button className={classes.nested}>
-                    <ListItemIcon>
-                      <StarBorder />
-                    </ListItemIcon>
+                    <ListItemIcon><StarBorder /></ListItemIcon>
                     <ListItemText inset primary="Starred" />
                   </ListItem>
                 </List>
@@ -135,9 +114,7 @@ class SimpleList extends Component {
           <div className={classes.listInner}>
             <List subheader={<ListSubheader>Настройки</ListSubheader>}>
               <ListItem>
-                <ListItemIcon>
-                  <WifiIcon />
-                </ListItemIcon>
+                <ListItemIcon><WifiIcon /></ListItemIcon>
                 <ListItemText primary="Wi-Fi" />
                 <ListItemSecondaryAction>
                   <Switch
@@ -147,9 +124,7 @@ class SimpleList extends Component {
                 </ListItemSecondaryAction>
               </ListItem>
               <ListItem>
-                <ListItemIcon>
-                  <BluetoothIcon />
-                </ListItemIcon>
+                <ListItemIcon><BluetoothIcon /></ListItemIcon>
                 <ListItemText primary="Bluetooth" />
                 <ListItemSecondaryAction>
                   <Switch
@@ -166,8 +141,6 @@ class SimpleList extends Component {
   }
 }
 
-SimpleList.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+SimpleList.propTypes = { classes: PropTypes.object.isRequired, };
 
 export default withStyles(styles)(SimpleList);

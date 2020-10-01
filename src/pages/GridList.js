@@ -105,8 +105,6 @@ function ImageGridList(props) {
   );
 }
 
-ImageGridList.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+ImageGridList.propTypes = { classes: PropTypes.object.isRequired };
 
 export default withStyles(styles)(ImageGridList);

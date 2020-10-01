@@ -49,8 +49,6 @@ const FlatButtons = props => {
   );
 };
 
-FlatButtons.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+FlatButtons.propTypes = { classes: PropTypes.object.isRequired };
 
 export default withStyles(styles)(FlatButtons);

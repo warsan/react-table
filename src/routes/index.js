@@ -52,7 +52,7 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
-    minWidth: 0 // So the Typography noWrap works
+    minWidth: 0 // Итак, Typography noWrap работает
   },
   toolbar: theme.mixins.toolbar
 });
@@ -75,65 +75,36 @@ const Routes = props => {
             {/* <div className={classes.toolbar} /> */}
             <List>
               <ListItem button component={Link} to="/">
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Главная" />
-              </ListItem>
+                <ListItemIcon><InboxIcon /></ListItemIcon>
+                <ListItemText primary="Главная" /></ListItem>
               <ListItem button component={Link} to="/tabs">
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
+                <ListItemIcon><InboxIcon /></ListItemIcon>
                 <ListItemText primary="Вкладки" />
               </ListItem>
               <ListItem button component={Link} to="/cards">
-                <ListItemIcon>
-                  <StarIcon />
-                </ListItemIcon>
-                <ListItemText primary="Открытки" />
-              </ListItem>
+                <ListItemIcon><StarIcon /></ListItemIcon>
+                <ListItemText primary="Открытки" /></ListItem>
               <ListItem button component={Link} to="/navigation">
-                <ListItemIcon>
-                  <StarIcon />
-                </ListItemIcon>
-                <ListItemText primary="Навигации" />
-              </ListItem>
+                <ListItemIcon><StarIcon /></ListItemIcon>
+                <ListItemText primary="Навигации" /></ListItem>
               <ListItem button component={Link} to="/gridlist">
-                <ListItemIcon>
-                  <StarIcon />
-                </ListItemIcon>
-                <ListItemText primary="Сетки" />
-              </ListItem>
+                <ListItemIcon><StarIcon /></ListItemIcon>
+                <ListItemText primary="Сетки" /></ListItem>
               <ListItem button component={Link} to="/forms">
-                <ListItemIcon>
-                  <SendIcon />
-                </ListItemIcon>
-                <ListItemText primary="Формы" />
-              </ListItem>
+                <ListItemIcon><SendIcon /></ListItemIcon>
+                <ListItemText primary="Формы" /></ListItem>
               <ListItem button component={Link} to="/lists">
-                <ListItemIcon>
-                  <SendIcon />
-                </ListItemIcon>
-                <ListItemText primary="Списки" />
-              </ListItem>
+                <ListItemIcon><SendIcon /></ListItemIcon>
+                <ListItemText primary="Списки" /></ListItem>
               <ListItem button component={Link} to="/modal">
-                <ListItemIcon>
-                  <SendIcon />
-                </ListItemIcon>
-                <ListItemText primary="Модалка" />
-              </ListItem>
+                <ListItemIcon><SendIcon /></ListItemIcon>
+                <ListItemText primary="Модалка" /></ListItem>
               <ListItem button component={Link} to="/tables">
-                <ListItemIcon>
-                  <DraftsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Таблицы" />
-              </ListItem>
+                <ListItemIcon><DraftsIcon /></ListItemIcon>
+                <ListItemText primary="Таблицы" /></ListItem>
               <ListItem button component={Link} to="/themes">
-                <ListItemIcon>
-                  <DraftsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Темы" />
-              </ListItem>
+                <ListItemIcon><DraftsIcon /></ListItemIcon>
+                <ListItemText primary="Темы" /></ListItem>
             </List>
           </Drawer>
           <main className={classes.content}>

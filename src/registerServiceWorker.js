@@ -1,18 +1,18 @@
-// In production, we register a service worker to serve assets from local cache.
+// В работе мы регистрируем сервис-воркера для обслуживания ресурсов из локального кеша.
+// Это позволяет приложению загружаться быстрее при последующих посещениях в рабочей среде
+// и даст возможность работать в автономном режиме.
+// Однако это также означает, что разработчики (и пользователи)
+// будут видеть развернутые обновления только при посещении страницы "N+1",
+// поскольку ранее кэшированные ресурсы обновляются в фоновом режиме.
 
-// This lets the app load faster on subsequent visits in production, and gives
-// it offline capabilities. However, it also means that developers (and users)
-// will only see deployed updates on the "N+1" visit to a page, since previously
-// cached resources are updated in the background.
-
-// To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
-// This link also includes instructions on opting out of this behavior.
+// Чтобы узнать больше о преимуществах этой модели, прочтите https://goo.gl/KwvDNy.
+// Эта ссылка также включает инструкции по отказу от такого поведения.
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
-    // [::1] is the IPv6 localhost address.
+    // [::1] - это локальный адрес IPv6.
     window.location.hostname === '[::1]' ||
-    // 127.0.0.1/8 is considered localhost for IPv4.
+    // 127.0.0.1/8 считается локальным хостом для IPv4.
     window.location.hostname.match(
       /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
     )
@@ -20,12 +20,12 @@ const isLocalhost = Boolean(
 
 export default function register() {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-    // The URL constructor is available in all browsers that support SW.
+    // Конструктор URL доступен во всех браузерах, поддерживающих SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     if (publicUrl.origin !== window.location.origin) {
-      // Our service worker won't work if PUBLIC_URL is on a different origin
-      // from what our page is served on. This might happen if a CDN is used to
-      // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374
+      // Наш serviceWorker не сработает, если PUBLIC_URL находится вне каталога нашей страницы.
+      // Это может произойти, если для обслуживания активов используется CDN;
+      // см. https://github.com/facebookincubator/create-react-app/issues/2374
       return;
     }
 
@@ -33,11 +33,10 @@ export default function register() {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
       if (isLocalhost) {
-        // This is running on localhost. Lets check if a service worker still exists or not.
+        // Это работает на локальном хосте. Давайте проверим, существует ли сервис-воркер.
         checkValidServiceWorker(swUrl);
-
-        // Add some additional logging to localhost, pointing developers to the
-        // service worker/PWA documentation.
+        // Добавьте дополнительное ведение журнала на localhost,
+        // указав разработчикам на документацию по serviceWorker/PWA.
         navigator.serviceWorker.ready.then(() => {
           console.log(
             'Это веб-приложение обслуживается службой в первую очередь из рабочего кеша. ' +
@@ -45,7 +44,7 @@ export default function register() {
           );
         });
       } else {
-        // Is not local host. Just register service worker
+        // Не является локальным хостом. Просто зарегистрируйте SW
         registerValidSW(swUrl);
       }
     });
