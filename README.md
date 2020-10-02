@@ -213,8 +213,6 @@ See the section about [deployment](#deployment) for more information.
 
 ## Supported Language Features and Polyfills
 
-This project supports a superset of the latest JavaScript standard.<br>
-In addition to [ES6](https://github.com/lukehoban/es6features) syntax features, it also supports:
 Этот проект поддерживает расширенный набор последних стандартов JavaScript.<br>
 Помимо функций синтаксиса [ES6](https://github.com/lukehoban/es6features), он также поддерживает:
 
