@@ -1029,8 +1029,6 @@ REACT_APP_BAR=$DOMAIN/bar
 
 ## Can I Use Decorators?
 
-Many popular libraries use [decorators](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841) in their documentation.<br>
-Create React App doesn’t support decorator syntax at the moment because:
 Многие популярные библиотеки используют в своей документации [декораторы](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841). <br>
 Приложение Create React на данный момент не поддерживает синтаксис декоратора, потому что:
 
