@@ -1969,6 +1969,7 @@ app.listen(9000);
 ```
 
 If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to create a `.htaccess` file in the `public` folder that looks like this:
+Если вы используете [Apache HTTP Server](https://httpd.apache.org/), вам нужно создать файл `.htaccess` в папке `public`, который выглядит следующим образом:
 
 ```
     Options -MultiViews
@@ -1977,22 +1978,16 @@ If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to c
     RewriteRule ^ index.html [QSA,L]
 ```
 
-It will get copied to the `build` folder when you run `npm run build`. 
+Он будет скопирован в папку `build`, когда вы запустите `npm run build`. 
 
-If you’re using [Apache Tomcat](http://tomcat.apache.org/), you need to follow [this Stack Overflow answer](https://stackoverflow.com/a/41249464/4878474).
+Если вы используете [Apache Tomcat](http://tomcat.apache.org/), вам необходимо следовать [этому ответу на Stack Overflow](https://stackoverflow.com/a/41249464/4878474).
 
-Now requests to `/todos/42` will be handled correctly both in development and in production.
 
-On a production build, and in a browser that supports [service workers](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers),
-the service worker will automatically handle all navigation requests, like for
-`/todos/42`, by serving the cached copy of your `index.html`. This
-service worker navigation routing can be configured or disabled by
-[`eject`ing](#npm-run-eject) and then modifying the
-[`navigateFallback`](https://github.com/GoogleChrome/sw-precache#navigatefallback-string)
-and [`navigateFallbackWhitelist`](https://github.com/GoogleChrome/sw-precache#navigatefallbackwhitelist-arrayregexp)
-options of the `SWPreachePlugin` [configuration](../config/webpack.config.prod.js).
+Теперь запросы к `/todos/42` будут корректно обрабатываться как в разработке, так и в производстве.
 
-When users install your app to the homescreen of their device the default configuration will make a shortcut to `/index.html`. This may not work for client-side routers which expect the app to be served from `/`. Edit the web app manifest at [`public/manifest.json`](public/manifest.json) and change `start_url` to match the required URL scheme, for example:
+В производственной сборке и в браузере, который поддерживает [сервис-воркеров](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers), сервис-воркер автоматически обрабатывает все запросы навигации. , как и для `/todos/42`, обслуживая кешированную копию вашего `index.html`. Эту маршрутизацию навигации сервис-воркера можно настроить или отключить, выполнив [`eject`ing](#npm-run-eject), а затем изменив [`navigateFallback`](https://github.com/GoogleChrome/sw-precache#navigatefallback-string) и [`navigateFallbackWhitelist`](https://github.com/GoogleChrome/sw-precache#navigatefallbackwhitelist-arrayregexp) параметры `SWPreachePlugin` [конфигурации](../config/webpack.config.prod.js).
+
+Когда пользователи устанавливают ваше приложение на домашний экран своего устройства, в конфигурации по умолчанию будет ссылка  `/index.html`. Это может не работать для маршрутизаторов на стороне клиента, которые ожидают, что приложение будет обслуживаться из `/`. Отредактируйте манифест веб-приложения по адресу [`public/manifest.json`](public/manifest.json) и измените `start_url`, чтобы он соответствовал требуемой схеме URL, например:
 
 ```js
   "start_url": ".",
@@ -2000,84 +1995,87 @@ When users install your app to the homescreen of their device the default config
 
 ### Building for Relative Paths
 
-By default, Create React App produces a build assuming your app is hosted at the server root.<br>
-To override this, specify the `homepage` in your `package.json`, for example:
+По умолчанию Create React App создает сборку, если ваше приложение размещено в корне сервера. <br>
+Чтобы переопределить это, укажите `домашнюю страницу` в вашем `package.json`, например:
 
 ```js
   "homepage": "http://mywebsite.com/relativepath",
 ```
 
-This will let Create React App correctly infer the root path to use in the generated HTML file.
+Это позволит Create React App правильно определить корневой путь для использования в сгенерированном HTML-файле.
 
-**Note**: If you are using `react-router@^4`, you can root `<Link>`s using the `basename` prop on any `<Router>`.<br>
-More information [here](https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string).<br>
+**Примечание**: Если вы используете `react-router@^4`, вы можете создать root `<Link>`s, используя свойство `basename` на любом `<Router>`.<br>
+Дополнительная информация [здесь](https://reacttraining.com/react-router/web/api/BrowserRouter/basename-string).<br>
 <br>
-For example:
+Например:
 ```js
 <BrowserRouter basename="/calendar"/>
-<Link to="/today"/> // renders <a href="/calendar/today">
+<Link to="/today"/> // оказывает <a href="/calendar/today">
 ```
 
 #### Serving the Same Build from Different Paths
 
->Note: this feature is available with `react-scripts@0.9.0` and higher.
+> Примечание: эта функция доступна в `react-scripts@0.9.0` и выше.
 
-If you are not using the HTML5 `pushState` history API or not using client-side routing at all, it is unnecessary to specify the URL from which your app will be served. Instead, you can put this in your `package.json`:
+Если вы не используете API истории HTML5 `pushState` или вообще не используете маршрутизацию на стороне клиента, указывать URL-адрес, с которого будет обслуживаться ваше приложение, необязательно. Вместо этого вы можете поместить это в свой `package.json`:
 
 ```js
   "homepage": ".",
 ```
 
-This will make sure that all the asset paths are relative to `index.html`. You will then be able to move your app from `http://mywebsite.com` to `http://mywebsite.com/relativepath` or even `http://mywebsite.com/relative/path` without having to rebuild it.
+Это гарантирует, что все пути к ресурсам относятся к `index.html`. После этого вы сможете переместить свое приложение с `http://mywebsite.com` на `http://mywebsite.com/relativepath` или даже с `http://mywebsite.com/relative/path` без необходимости перестраивать Это.
 
 ### [Azure](https://azure.microsoft.com/)
 
-See [this](https://medium.com/@to_pe/deploying-create-react-app-on-microsoft-azure-c0f6686a4321) blog post on how to deploy your React app to Microsoft Azure.
+См. [Это](https://medium.com/@to_pe/deploying-create-react-app-on-microsoft-azure-c0f6686a4321) сообщение в блоге о том, как развернуть приложение React в Microsoft Azure.
 
-See [this](https://medium.com/@strid/host-create-react-app-on-azure-986bc40d5bf2#.pycfnafbg) blog post or [this](https://github.com/ulrikaugustsson/azure-appservice-static) repo for a way to use automatic deployment to Azure App Service.
+См. [Это](https://medium.com/@strid/host-create-react-app-on-azure-986bc40d5bf2#.pycfnafbg) сообщение в блоге или [это](https://github.com/ulrikaugustsson/azure-appservice-static), чтобы узнать, как использовать автоматическое развертывание в службе приложений Azure.
 
 ### [Firebase](https://firebase.google.com/)
 
-Install the Firebase CLI if you haven’t already by running `npm install -g firebase-tools`. Sign up for a [Firebase account](https://console.firebase.google.com/) and create a new project. Run `firebase login` and login with your previous created Firebase account.
+Установите Firebase CLI, если вы еще этого не сделали, запустив `npm install -g firebase-tools`. Зарегистрируйте [аккаунт Firebase](https://console.firebase.google.com/) и создайте новый проект. Запустите `firebase login` и войдите в свою ранее созданную учетную запись Firebase.
 
-Then run the `firebase init` command from your project’s root. You need to choose the **Hosting: Configure and deploy Firebase Hosting sites** and choose the Firebase project you created in the previous step. You will need to agree with `database.rules.json` being created, choose `build` as the public directory, and also agree to **Configure as a single-page app** by replying with `y`.
+Затем запустите команду `firebase init` из корня вашего проекта. Вам нужно выбрать **Хостинг: настроить и развернуть сайты хостинга Firebase** и выбрать проект Firebase, созданный на предыдущем шаге. Вам нужно будет согласиться с созданием `database.rules.json`, выбрать `build` в качестве общедоступного каталога, а также согласиться **Настроить как одностраничное приложение**, ответив `y`.
 
 ```sh
-    === Project Setup
+    === Настройка проекта
 
     First, let's associate this project directory with a Firebase project.
     You can create multiple project aliases by running firebase use --add,
-    but for now we'll just set up a default project.
+    but for now we'll just set up a default project. 
+    Во-первых, давайте свяжем этот каталог проекта с проектом Firebase.
+    Вы можете создать несколько псевдонимов проекта, запустив firebase use --add,
+    но пока мы просто настроим проект по умолчанию.
 
-    ? What Firebase project do you want to associate as default? Example app (example-app-fd690)
+    ? Какой проект Firebase вы хотите связать по умолчанию? Пример приложения (example-app-fd690)
 
-    === Database Setup
+    === Настройка базы данных
 
-    Firebase Realtime Database Rules allow you to define how your data should be
-    structured and when your data can be read from and written to.
+    Правила базы данных Firebase Realtime позволяют вам определять, как ваши данные должны быть
+    структурированы, и когда ваши данные могут быть прочитаны и записаны.
 
-    ? What file should be used for Database Rules? database.rules.json
-    ✔  Database Rules for example-app-fd690 have been downloaded to database.rules.json.
-    Future modifications to database.rules.json will update Database Rules when you run
-    firebase deploy.
+    ? Какой файл следует использовать для правил базы данных? database.rules.json
+    ✔ Правила базы данных для example-app-fd690 загружены в database.rules.json.
+    Будущие модификации database.rules.json будут обновлять правила базы данных при запуске
+    firebase развертывание.
 
-    === Hosting Setup
+    === Настройка хостинга
 
-    Your public directory is the folder (relative to your project directory) that
-    will contain Hosting assets to uploaded with firebase deploy. If you
-    have a build process for your assets, use your build's output directory.
+    Ваш общий каталог - это папка (относительно каталога вашего проекта),
+    будет содержать ресурсы хостинга, загружаемые с помощью firebase deploy. если 
+    есть процесс сборки для ваших активов, используйте выходной каталог сборки.
 
-    ? What do you want to use as your public directory? build
-    ? Configure as a single-page app (rewrite all urls to /index.html)? Yes
-    ✔  Wrote build/index.html
+    ? Что вы хотите использовать в качестве общедоступного каталога? строить
+    ? Настроить как одностраничное приложение (переписать все URL-адреса в /index.html)? да
+    ✔ Написал build/index.html
 
-    i  Writing configuration info to firebase.json...
-    i  Writing project information to .firebaserc...
+    i  Запись информации о конфигурации в firebase.json...
+    i  Запись информации о проекте в .firebaserc...
 
-    ✔  Firebase initialization complete!
+    ✔ Инициализация Firebase завершена!
 ```
 
-IMPORTANT: you need to set proper HTTP caching headers for `service-worker.js` file in `firebase.json` file or you will not be able to see changes after first deployment ([issue #2440](https://github.com/facebookincubator/create-react-app/issues/2440)). It should be added inside `"hosting"` key like next:
+ВАЖНО: вам необходимо установить правильные заголовки HTTP-кеширования для файла `service-worker.js` в файле `firebase.json`, иначе вы не сможете увидеть изменения после первого развертывания ([issue #2440](https://github.com/facebookincubator/create-react-app/issues/2440)). Его нужно добавить внутри ключа `«hosting»`, как показано ниже:
 
 ```
 {
@@ -2089,7 +2087,7 @@ IMPORTANT: you need to set proper HTTP caching headers for `service-worker.js` f
     ...
 ```
 
-Now, after you create a production build with `npm run build`, you can deploy it by running `firebase deploy`.
+Теперь, когда вы создали производственную сборку с помощью `npm run build`, вы можете развернуть ее, запустив `firebase deploy`.
 
 ```sh
     === Deploying to 'example-app-fd690'...
@@ -2107,48 +2105,48 @@ Now, after you create a production build with `npm run build`, you can deploy it
     Hosting URL: https://example-app-fd690.firebaseapp.com
 ```
 
-For more information see [Add Firebase to your JavaScript Project](https://firebase.google.com/docs/web/setup).
+Для получения дополнительной информации см. [Добавить Firebase в свой проект JavaScript](https://firebase.google.com/docs/web/setup).
 
 ### [GitHub Pages](https://pages.github.com/)
 
->Note: this feature is available with `react-scripts@0.2.0` and higher.
+>Примечание: эта функция доступна в `react-scripts@0.2.0` и выше.
 
 #### Step 1: Add `homepage` to `package.json`
 
-**The step below is important!**<br>
-**If you skip it, your app will not deploy correctly.**
+**Шаг ниже важен!**<br>
+**Если вы его пропустите, ваше приложение не будет правильно развернуто.**
 
-Open your `package.json` and add a `homepage` field for your project:
+Откройте ваш `package.json` и добавьте поле `homepage` для вашего проекта:
 
 ```json
   "homepage": "https://myusername.github.io/my-app",
 ```
 
-or for a GitHub user page:
+или для страницы пользователя GitHub:
 
 ```json
   "homepage": "https://myusername.github.io",
 ```
 
-Create React App uses the `homepage` field to determine the root URL in the built HTML file.
+Приложение Create React использует поле `homepage` для определения корневого URL-адреса во встроенном HTML-файле.
 
 #### Step 2: Install `gh-pages` and add `deploy` to `scripts` in `package.json`
 
-Now, whenever you run `npm run build`, you will see a cheat sheet with instructions on how to deploy to GitHub Pages.
+Теперь, когда вы запускаете `npm run build`, вы увидите чит-лист с инструкциями по развертыванию на GitHub Pages.
 
-To publish it at [https://myusername.github.io/my-app](https://myusername.github.io/my-app), run:
+Чтобы опубликовать его на [https://myusername.github.io/my-app](https://myusername.github.io/my-app), запустите:
 
 ```sh
 npm install --save gh-pages
 ```
 
-Alternatively you may use `yarn`:
+В качестве альтернативы можете использовать `yarn`:
 
 ```sh
 yarn add gh-pages
 ```
 
-Add the following scripts in your `package.json`:
+Добавьте следующие скрипты в ваш `package.json`:
 
 ```diff
   "scripts": {
@@ -2158,13 +2156,12 @@ Add the following scripts in your `package.json`:
     "build": "react-scripts build",
 ```
 
-The `predeploy` script will run automatically before `deploy` is run.
+Сценарий `Preploy` будет запускаться автоматически перед запуском `deploy`.
 
-If you are deploying to a GitHub user page instead of a project page you'll need to make two
-additional modifications:
+Если вы выполняете развертывание на странице пользователя GitHub, а не на странице проекта, вам необходимо внести два дополнительных изменения:
 
-1. First, change your repository's source branch to be any branch other than **master**.
-1. Additionally, tweak your `package.json` scripts to push deployments to **master**:
+1. Сначала измените исходную ветку репозитория на любую ветку, кроме **master**.
+1. Кроме того, настройте свои сценарии `package.json` для отправки развертываний на **master**:
 ```diff
   "scripts": {
     "predeploy": "npm run build",
@@ -2182,43 +2179,43 @@ npm run deploy
 
 #### Step 4: Ensure your project’s settings use `gh-pages`
 
-Finally, make sure **GitHub Pages** option in your GitHub project settings is set to use the `gh-pages` branch:
+Наконец, убедитесь, что параметр **GitHub Pages** в настройках вашего проекта GitHub настроен на использование ветки `gh-pages`:
 
 <img src="http://i.imgur.com/HUjEr9l.png" width="500" alt="gh-pages branch setting">
 
 #### Step 5: Optionally, configure the domain
 
-You can configure a custom domain with GitHub Pages by adding a `CNAME` file to the `public/` folder.
+Вы можете настроить личный домен с помощью GitHub Pages, добавив файл CNAME в папку `public/`.
 
 #### Notes on client-side routing
 
-GitHub Pages doesn’t support routers that use the HTML5 `pushState` history API under the hood (for example, React Router using `browserHistory`). This is because when there is a fresh page load for a url like `http://user.github.io/todomvc/todos/42`, where `/todos/42` is a frontend route, the GitHub Pages server returns 404 because it knows nothing of `/todos/42`. If you want to add a router to a project hosted on GitHub Pages, here are a couple of solutions:
+GitHub Pages не поддерживает маршрутизаторы, которые используют API истории HTML5 `pushState` (например, React Router с использованием `browserHistory`). Это связано с тем, что при загрузке новой страницы для URL-адреса типа `http://user.github.io/todomvc/todos/42`, где `/todos/42` - маршрут внешнего интерфейса, сервер страниц GitHub возвращает 404, потому что он ничего не знает о `/todos/42`. Если вы хотите добавить маршрутизатор в проект, размещенный на страницах GitHub, вот несколько решений:
 
-* You could switch from using HTML5 history API to routing with hashes. If you use React Router, you can switch to `hashHistory` for this effect, but the URL will be longer and more verbose (for example, `http://user.github.io/todomvc/#/todos/42?_k=yknaj`). [Read more](https://reacttraining.com/react-router/web/api/Router) about different history implementations in React Router.
-* Alternatively, you can use a trick to teach GitHub Pages to handle 404 by redirecting to your `index.html` page with a special redirect parameter. You would need to add a `404.html` file with the redirection code to the `build` folder before deploying your project, and you’ll need to add code handling the redirect parameter to `index.html`. You can find a detailed explanation of this technique [in this guide](https://github.com/rafrex/spa-github-pages).
+* Вы можете переключиться с использования API истории HTML5 на маршрутизацию с хешами. Если вы используете React Router, вы можете переключиться на `hashHistory` для этого эффекта, но URL-адрес будет длиннее и более подробным (например,`http://user.github.io/todomvc/#/todos/42?_k=yknaj`). [Подробнее](https://reacttraining.com/react-router/web/api/Router) о различных реализациях истории в React Router.
+* В качестве альтернативы можно использовать трюк, чтобы научить GitHub Pages обрабатывать 404, перенаправив на вашу страницу `index.html` со спецпараметром перенаправления. Вам нужно будет добавить файл `404.html` с кодом перенаправления в папку `build` перед развёртыванием вашего проекта, и вам нужно будет добавить код, обрабатывающий параметр перенаправления, в `index.html`. Вы можете найти подробное объяснение этой техники [в этом руководстве](https://github.com/rafrex/spa-github-pages).
 
 #### Troubleshooting
 
 ##### "/dev/tty: No such a device or address"
 
-If, when deploying, you get `/dev/tty: No such a device or address` or a similar error, try the follwing:
+Если при развертывании вы получите `/dev/tty: No such a device or address` или аналогичную ошибку, попробуйте следующее:
 
-1. Create a new [Personal Access Token](https://github.com/settings/tokens)
+1. Создайте новый [токен личного доступа](https://github.com/settings/tokens)
 2. `git remote set-url origin https://<user>:<token>@github.com/<user>/<repo>` .
-3. Try `npm run deploy again`
+3. Попробуйте `npm run deploy again`
 
 ### [Heroku](https://www.heroku.com/)
 
-Use the [Heroku Buildpack for Create React App](https://github.com/mars/create-react-app-buildpack).<br>
-You can find instructions in [Deploying React with Zero Configuration](https://blog.heroku.com/deploying-react-with-zero-configuration).
+Используйте [Heroku Buildpack для создания приложения React](https://github.com/mars/create-react-app-buildpack).<br>
+Вы можете найти инструкции в [Развертывание React с нулевой конфигурацией](https://blog.heroku.com/deploying-react-with-zero-configuration).
 
 #### Resolving Heroku Deployment Errors
 
-Sometimes `npm run build` works locally but fails during deploy via Heroku. Following are the most common cases.
+Иногда `npm run build` работает локально, но не работает во время развертывания через Heroku. Ниже приведены наиболее частые случаи.
 
 ##### "Module not found: Error: Cannot resolve 'file' or 'directory'"
 
-If you get something like this:
+Если получится что-то вроде этого:
 
 ```
 remote: Failed to create a production build. Reason:
@@ -2226,13 +2223,13 @@ remote: Module not found: Error: Cannot resolve 'file' or 'directory'
 MyDirectory in /tmp/build_1234/src
 ```
 
-It means you need to ensure that the lettercase of the file or directory you `import` matches the one you see on your filesystem or on GitHub.
+Значит нужно убедиться, что буквенный регистр файла или каталога, который идёт в `import`, соответствует тому, который вы видите в своей файловой системе или на GitHub.
 
-This is important because Linux (the operating system used by Heroku) is case sensitive. So `MyDirectory` and `mydirectory` are two distinct directories and thus, even though the project builds locally, the difference in case breaks the `import` statements on Heroku remotes.
+Это важно, потому что Linux (операционная система, используемая Heroku) чувствительна к регистру. Итак, `MyDirectory` и `mydirectory` - это два разных каталога, и поэтому, даже если проект строится локально, разница в регистре прерывает операторы `import` на пультах Heroku.
 
 ##### "Could not find a required file."
 
-If you exclude or ignore necessary files from the package you will see a error similar this one:
+Если вы исключите или проигнорируете необходимые файлы из пакета, вы увидите ошибку, аналогичную этой:
 
 ```
 remote: Could not find a required file.
@@ -2243,118 +2240,117 @@ remote: npm ERR! Linux 3.13.0-105-generic
 remote: npm ERR! argv "/tmp/build_a2875fc163b209225122d68916f1d4df/.heroku/node/bin/node" "/tmp/build_a2875fc163b209225122d68916f1d4df/.heroku/node/bin/npm" "run" "build"
 ```
 
-In this case, ensure that the file is there with the proper lettercase and that’s not ignored on your local `.gitignore` or `~/.gitignore_global`.
+В этом случае убедитесь, что файл находится там с правильным регистром и не игнорируется в вашем локальном файле `.gitignore` или `~/.gitignore_global`.
 
 ### [Netlify](https://www.netlify.com/)
 
-**To do a manual deploy to Netlify’s CDN:**
+**Чтобы выполнить развертывание вручную в CDN Netlify:**
 
 ```sh
 npm install netlify-cli -g
 netlify deploy
 ```
 
-Choose `build` as the path to deploy.
+Выберите `build` в качестве пути для развертывания.
 
-**To setup continuous delivery:**
+**Чтобы настроить непрерывную доставку:**
 
-With this setup Netlify will build and deploy when you push to git or open a pull request:
+С этой настройкой Netlify будет создавать и развертывать, когда вы нажимаете на git или открываете запрос на перенос:
 
-1. [Start a new netlify project](https://app.netlify.com/signup)
-2. Pick your Git hosting service and select your repository
-3. Set `yarn build` as the build command and `build` as the publish directory
-4. Click `Deploy site`
+1. [Начать новый проект netlify](https://app.netlify.com/signup)
+2. Выберите свою службу хостинга Git и выберите свой репозиторий
+3. Установите `yarn build` как команду сборки и `build` как каталог публикации
+4. Нажмите `Deploy site`
 
-**Support for client-side routing:**
+**Поддержка маршрутизации на стороне клиента:**
 
-To support `pushState`, make sure to create a `public/_redirects` file with the following rewrite rules:
+Для поддержки `pushState` убедитесь, что вы создали файл `public/_redirects` со следующими правилами перезаписи:
 
 ```
 /*  /index.html  200
 ```
 
-When you build the project, Create React App will place the `public` folder contents into the build output.
+Когда вы строите проект, Create React App помещает содержимое папки `public` в выходные данные сборки.
 
 ### [Now](https://zeit.co/now)
 
-Now offers a zero-configuration single-command deployment. You can use `now` to deploy your app for free.
+`Now` предлагает развёртывание с одной командой без настройки. Вы можете использовать `now` для бесплатного развёртывания приложения.
 
-1. Install the `now` command-line tool either via the recommended [desktop tool](https://zeit.co/download) or via node with `npm install -g now`.
+1. Установите инструмент командной строки `now` либо с помощью рекомендованного [desktop tool](https://zeit.co/download), либо через node с помощью `npm install -g now`.
 
-2. Build your app by running `npm run build`.
+2. Создайте своё приложение, запустив `npm run build`.
 
-3. Move into the build directory by running `cd build`.
+3. Перейдите в каталог сборки, запустив `cd build`.
 
-4. Run `now --name your-project-name` from within the build directory. You will see a **now.sh** URL in your output like this:
+4. Запустите `now --name your-project-name` из каталога сборки. В выводе вы увидите URL **now.sh**, например:
 
     ```
     > Ready! https://your-project-name-tpspyhtdtk.now.sh (copied to clipboard)
     ```
 
-    Paste that URL into your browser when the build is complete, and you will see your deployed app.
+    Вставьте этот URL-адрес в свой браузер, когда сборка будет завершена, и вы увидите развёрнутое приложение.
 
-Details are available in [this article.](https://zeit.co/blog/unlimited-static)
+Подробности доступны в [этой статье](https://zeit.co/blog/unlimited-static)
 
 ### [S3](https://aws.amazon.com/s3) and [CloudFront](https://aws.amazon.com/cloudfront/)
 
-See this [blog post](https://medium.com/@omgwtfmarc/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af) on how to deploy your React app to Amazon Web Services S3 and CloudFront.
+См. Это [сообщение в блоге](https://medium.com/@omgwtfmarc/deploying-create-react-app-to-s3-or-cloudfront-48dae4ce0af) о том, как развернуть приложение React в Amazon Web Services S3 и CloudFront.
 
 ### [Surge](https://surge.sh/)
 
-Install the Surge CLI if you haven’t already by running `npm install -g surge`. Run the `surge` command and log in you or create a new account.
+Установите Surge CLI, если вы еще этого не сделали, запустив `npm install -g surge`. Запустите команду `surge` и войдите в систему или создайте новую учетную запись.
 
-When asked about the project path, make sure to specify the `build` folder, for example:
+Когда вас спросят о пути к проекту, обязательно укажите папку `build`, например:
 
 ```sh
        project path: /path/to/project/build
 ```
 
-Note that in order to support routers that use HTML5 `pushState` API, you may want to rename the `index.html` in your build folder to `200.html` before deploying to Surge. This [ensures that every URL falls back to that file](https://surge.sh/help/adding-a-200-page-for-client-side-routing).
+Обратите внимание, что для поддержки маршрутизаторов, использующих HTML5 API `pushState`, вы можете захотеть переименовать файл `index.html` в папке сборки в `200.html` перед развёртыванием в Surge. Это [гарантирует, что каждый URL-адрес возвращается к этому файлу](https://surge.sh/help/adding-a-200-page-for-client-side-routing).
 
 ## Advanced Configuration
 
-You can adjust various development and production settings by setting environment variables in your shell or with [.env](#adding-development-environment-variables-in-env).
+Вы можете настроить различные параметры разработки и производства, задав переменные среды в своей оболочке или с помощью [.env](#adding-development-environment-variables-in-env).
 
 Variable | Development | Production | Usage
 :--- | :---: | :---: | :---
-BROWSER | :white_check_mark: | :x: | By default, Create React App will open the default system browser, favoring Chrome on macOS. Specify a [browser](https://github.com/sindresorhus/opn#app) to override this behavior, or set it to `none` to disable it completely. If you need to customize the way the browser is launched, you can specify a node script instead. Any arguments passed to `npm start` will also be passed to this script, and the url where your app is served will be the last argument. Your script's file name must have the `.js` extension.
-HOST | :white_check_mark: | :x: | By default, the development web server binds to `localhost`. You may use this variable to specify a different host.
-PORT | :white_check_mark: | :x: | By default, the development web server will attempt to listen on port 3000 or prompt you to attempt the next available port. You may use this variable to specify a different port.
-HTTPS | :white_check_mark: | :x: | When set to `true`, Create React App will run the development server in `https` mode.
-PUBLIC_URL | :x: | :white_check_mark: | Create React App assumes your application is hosted at the serving web server's root or a subpath as specified in [`package.json` (`homepage`)](#building-for-relative-paths). Normally, Create React App ignores the hostname. You may use this variable to force assets to be referenced verbatim to the url you provide (hostname included). This may be particularly useful when using a CDN to host your application.
-CI | :large_orange_diamond: | :white_check_mark: | When set to `true`, Create React App treats warnings as failures in the build. It also makes the test runner non-watching. Most CIs set this flag by default.
-REACT_EDITOR | :white_check_mark: | :x: | When an app crashes in development, you will see an error overlay with clickable stack trace. When you click on it, Create React App will try to determine the editor you are using based on currently running processes, and open the relevant source file. You can [send a pull request to detect your editor of choice](https://github.com/facebookincubator/create-react-app/issues/2636). Setting this environment variable overrides the automatic detection. If you do it, make sure your systems [PATH](https://en.wikipedia.org/wiki/PATH_(variable)) environment variable points to your editor’s bin folder. You can also set it to `none` to disable it completely.
-CHOKIDAR_USEPOLLING | :white_check_mark: | :x: | When set to `true`, the watcher runs in polling mode, as necessary inside a VM. Use this option if `npm start` isn't detecting changes.
-GENERATE_SOURCEMAP | :x: | :white_check_mark: | When set to `false`, source maps are not generated for a production build. This solves OOM issues on some smaller machines.
-NODE_PATH | :white_check_mark: |  :white_check_mark: | Same as [`NODE_PATH` in Node.js](https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders), but only relative folders are allowed. Can be handy for emulating a monorepo setup by setting `NODE_PATH=src`.
+BROWSER | :white_check_mark: | :x: | По умолчанию приложение Create React откроет системный браузер по умолчанию, предпочитая Chrome в macOS. Укажите [браузер](https://github.com/sindresorhus/opn#app), чтобы переопределить это поведение, или установите для него значение `none`, чтобы полностью отключить его. Если вам нужно настроить способ запуска браузера, вы можете вместо этого указать сценарий узла. Любые аргументы, переданные в `npm start`, также будут переданы этому скрипту, а URL-адрес, по которому обслуживается ваше приложение, будет последним аргументом. Имя файла вашего скрипта должно иметь расширение `.js`.
+HOST | :white_check_mark: | :x: | По умолчанию веб-сервер разработки привязывается к `localhost`. Вы можете использовать эту переменную, чтобы указать другой хост.
+PORT | :white_check_mark: | :x: | По умолчанию веб-сервер разработки будет пытаться прослушивать порт 3000 или предлагать вам попробовать следующий доступный порт. Вы можете использовать эту переменную, чтобы указать другой порт.
+HTTPS | :white_check_mark: | :x: | Если установлено значение `true`, Create React App будет запускать сервер разработки в режиме `https`.
+PUBLIC_URL | :x: | :white_check_mark: | Create React App предполагает, что ваше приложение размещено в корне обслуживающего веб-сервера или в подпутье, как указано в [`package.json` (`homepage`)](#building-for-relative-paths). Обычно приложение Create React игнорирует имя хоста. Вы можете использовать эту переменную для принудительной ссылки на ресурсы по указанному вами URL (включая имя хоста). Это может быть особенно полезно при использовании CDN для размещения вашего приложения.
+CI | :large_orange_diamond: | :white_check_mark: | When set to `true`, Приложение Create React обрабатывает предупреждения как сбои в сборке. Это также делает не наблюдающим за бегуном-тестером. Большинство CI устанавливают этот флаг по умолчанию.
+REACT_EDITOR | :white_check_mark: | :x: | Когда приложение вылетает в процессе разработки, вы увидите сообщение об ошибке с интерактивной трассировкой стека. Когда вы щелкнете по нему, приложение Create React попытается определить используемый вами редактор на основе текущих запущенных процессов и откроет соответствующий исходный файл. Вы можете [отправить запрос на перенос для определения выбранного редактора](https://github.com/facebookincubator/create-react-app/issues/2636). Установка этой переменной среды отменяет автоматическое обнаружение. Если вы это сделаете, убедитесь, что переменная среды вашей системы [PATH](https://en.wikipedia.org/wiki/PATH_(variable)) указывает на папку bin вашего редактора. Вы также можете установить для него значение `none`, чтобы полностью отключить его.
+CHOKIDAR_USEPOLLING | :white_check_mark: | :x: | Если установлено значение `true`, наблюдатель работает в режиме опроса, если это необходимо внутри виртуальной машины. Используйте эту опцию, если `npm start` не обнаруживает изменений.
+GENERATE_SOURCEMAP | :x: | :white_check_mark: | Если установлено значение `false`, исходные карты не создаются для производственной сборки. Это решает проблемы OOM на некоторых небольших машинах.
+NODE_PATH | :white_check_mark: |  :white_check_mark: | То же, что [`NODE_PATH` в Node.js](https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders), но разрешены только относительные папки. Может быть удобно для эмуляции настройки монорепозитория путем установки `NODE_PATH=src`.
 
 ## Troubleshooting
 
 ### `npm start` doesn’t detect changes
 
-When you save a file while `npm start` is running, the browser should refresh with the updated code.<br>
-If this doesn’t happen, try one of the following workarounds:
+Когда вы сохраняете файл во время работы `npm start`, браузер должен обновиться с обновленным кодом. <br>
+Если этого не произошло, попробуйте один из следующих способов:
 
-* If your project is in a Dropbox folder, try moving it out.
-* If the watcher doesn’t see a file called `index.js` and you’re referencing it by the folder name, you [need to restart the watcher](https://github.com/facebookincubator/create-react-app/issues/1164) due to a Webpack bug.
-* Some editors like Vim and IntelliJ have a “safe write” feature that currently breaks the watcher. You will need to disable it. Follow the instructions in [“Adjusting Your Text Editor”](https://webpack.js.org/guides/development/#adjusting-your-text-editor).
-* If your project path contains parentheses, try moving the project to a path without them. This is caused by a [Webpack watcher bug](https://github.com/webpack/watchpack/issues/42).
-* On Linux and macOS, you might need to [tweak system settings](https://github.com/webpack/docs/wiki/troubleshooting#not-enough-watchers) to allow more watchers.
-* If the project runs inside a virtual machine such as (a Vagrant provisioned) VirtualBox, create an `.env` file in your project directory if it doesn’t exist, and add `CHOKIDAR_USEPOLLING=true` to it. This ensures that the next time you run `npm start`, the watcher uses the polling mode, as necessary inside a VM.
+* Если ваш проект находится в папке Dropbox, попробуйте переместить его.
+* Если наблюдатель не видит файл с именем `index.js` и вы ссылаетесь на него по имени папки, вам [необходимо перезапустить наблюдатель](https://github.com/facebookincubator/create-react-app/issues/1164) из-за ошибки Webpack.
+* Некоторые редакторы, такие как Vim и IntelliJ, имеют функцию «безопасной записи», которая в настоящее время нарушает работу наблюдателя. Вам нужно будет отключить его. Следуйте инструкциям в [«Настройка текстового редактора»](https://webpack.js.org/guides/development/#adjusting-your-text-editor).
+* Если путь к вашему проекту содержит круглые скобки, попробуйте переместить проект на путь без них. Это вызвано [ошибкой наблюдателя Webpack](https://github.com/webpack/watchpack/issues/42).
+* В Linux и macOS вам может потребоваться [настроить параметры системы](https://github.com/webpack/docs/wiki/troubleshooting#not-enough-watchers), чтобы разрешить больше наблюдателей.
+* Если проект выполняется внутри виртуальной машины, такой как VirtualBox (подготовленный Vagrant), создайте файл `.env` в каталоге вашего проекта, если он не существует, и добавьте к нему `CHOKIDAR_USEPOLLING=true`. Это гарантирует, что в следующий раз, когда вы запустите `npm start`, наблюдатель будет использовать режим опроса, если это необходимо внутри VM.
 
-If none of these solutions help please leave a comment [in this thread](https://github.com/facebookincubator/create-react-app/issues/659).
+Если ни одно из этих решений не помогло, оставьте комментарий [в этой теме](https://github.com/facebookincubator/create-react-app/issues/659).
 
 ### `npm test` hangs on macOS Sierra
 
-If you run `npm test` and the console gets stuck after printing `react-scripts test --env=jsdom` to the console there might be a problem with your [Watchman](https://facebook.github.io/watchman/) installation as described in [facebookincubator/create-react-app#713](https://github.com/facebookincubator/create-react-app/issues/713).
-
-We recommend deleting `node_modules` in your project and running `npm install` (or `yarn` if you use it) first. If it doesn't help, you can try one of the numerous workarounds mentioned in these issues:
+Если при запуске `npm test` консоль зависает после вывода на консоль `react-scripts test --env=jsdom`, возможно, проблема с вашим [Watchman](https://facebook.github.io/watchman/), как описано в [facebookincubator/create-react-app#713](https://github.com/facebookincubator/create-react-app/issues/713).
+Мы рекомендуем сначала удалить `node_modules` из вашего проекта и запустить `npm install` (или `yarn`, если вы его используете). Если это не поможет, вы можете попробовать один из многочисленных обходных путей, упомянутых в этих проблемах:
 
 * [facebook/jest#1767](https://github.com/facebook/jest/issues/1767)
 * [facebook/watchman#358](https://github.com/facebook/watchman/issues/358)
 * [ember-cli/ember-cli#6259](https://github.com/ember-cli/ember-cli/issues/6259)
 
-It is reported that installing Watchman 4.7.0 or newer fixes the issue. If you use [Homebrew](http://brew.sh/), you can run these commands to update it:
+Сообщается, что установка Watchman 4.7.0 или новее устраняет проблему. Если вы используете [Homebrew](http://brew.sh/), вы можете выполнить следующие команды, чтобы обновить его:
 
 ```
 watchman shutdown-server
@@ -2362,31 +2358,31 @@ brew update
 brew reinstall watchman
 ```
 
-You can find [other installation methods](https://facebook.github.io/watchman/docs/install.html#build-install) on the Watchman documentation page.
+Вы можете найти [другие методы установки](https://facebook.github.io/watchman/docs/install.html#build-install) на странице документации Watchman.
 
-If this still doesn’t help, try running `launchctl unload -F ~/Library/LaunchAgents/com.github.facebook.watchman.plist`.
+Если это по-прежнему не помогает, попробуйте запустить `launchctl unload -F ~/Library/LaunchAgents/com.github.facebook.watchman.plist`.
 
-There are also reports that *uninstalling* Watchman fixes the issue. So if nothing else helps, remove it from your system and try again.
+Также есть сообщения, что *удаление* Watchman решает проблему. Так что, если ничего не помогает, удалите его из своей системы и попробуйте ещё раз.
 
 ### `npm run build` exits too early
 
-It is reported that `npm run build` can fail on machines with limited memory and no swap space, which is common in cloud environments. Even with small projects this command can increase RAM usage in your system by hundreds of megabytes, so if you have less than 1 GB of available memory your build is likely to fail with the following message:
+Сообщается, что `npm run build` может дать сбой на машинах с ограниченной памятью и без подкачки, что является обычным явлением в облачных средах. Даже в небольших проектах эта команда может увеличить использование оперативной памяти в вашей системе на сотни мегабайт, поэтому, если у вас меньше 1 ГБ доступной памяти, ваша сборка, скорее всего, завершится ошибкой со следующим сообщением:
 
 >  The build failed because the process exited too early. This probably means the system ran out of memory or someone called `kill -9` on the process.
 
-If you are completely sure that you didn't terminate the process, consider [adding some swap space](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04) to the machine you’re building on, or build the project locally.
+Если вы полностью уверены, что не прерывали процесс, подумайте о [добавлении пространства подкачки](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04) к машине, на которой вы строите или создайте проект локально.
 
 ### `npm run build` fails on Heroku
 
-This may be a problem with case sensitive filenames.
-Please refer to [this section](#resolving-heroku-deployment-errors).
+Это может быть проблема с именами файлов, чувствительными к регистру.
+См. [Этот раздел](#resolving-heroku-deployment-errors).
 
 ### Moment.js locales are missing
 
-If you use a [Moment.js](https://momentjs.com/), you might notice that only the English locale is available by default. This is because the locale files are large, and you probably only need a subset of [all the locales provided by Moment.js](https://momentjs.com/#multiple-locale-support).
+Если вы используете [Moment.js](https://momentjs.com/), вы можете заметить, что по умолчанию доступен только английский язык. Это связано с тем, что файлы локалей велики, и вам, вероятно, понадобится только подмножество [всех локалей, предоставляемых Moment.js](https://momentjs.com/#multiple-locale-support).
 
-To add a specific Moment.js locale to your bundle, you need to import it explicitly.<br>
-For example:
+Чтобы добавить в пакет конкретную локаль `Moment.js`, вам необходимо явно импортировать её.<br>
+Например:
 
 ```js
 import moment from 'moment';
@@ -2407,7 +2403,7 @@ moment.locale('fr');
 
 Это будет работать только для локалей, которые были явно импортированы ранее.
 
-### `npm run build` не удается минимизировать
+### `npm run build` не удаётся минимизировать
 
 Некоторые сторонние пакеты не компилируют свой код в ES5 перед публикацией в npm. Это часто вызывает проблемы в экосистеме, потому что ни браузеры (за исключением большинства современных версий), ни некоторые инструменты в настоящее время не поддерживают все функции ES6. Мы рекомендуем публиковать код на npm как ES5 хотя бы на несколько лет.
 
@@ -2419,7 +2415,7 @@ moment.locale('fr');
 
 2. Создайте ветку пакета и самостоятельно опубликуйте исправленную версию. 
 
-3. Если зависимость достаточно мала, скопируйте ее в папку `src /` и рассматривайте как код приложения.
+3. Если зависимость достаточно мала, скопируйте ее в папку `src/` и рассматривайте как код приложения.
 
 В будущем мы можем начать автоматическую компиляцию несовместимых сторонних модулей, но в настоящее время это не поддерживается. Такой подход также замедлит производственные сборки.
 
