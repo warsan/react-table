@@ -603,7 +603,6 @@ yarn add node-sass-chokidar
 Чтобы обмениваться переменными между файлами Sass, вы можете использовать импорт Sass. 
 Например, `src/App.scss` и другие файлы стилей компонентов могут включать `@import "./shared.scss";` с определениями переменных.
 
-To enable importing files without using relative paths, you can add the  `--include-path` option to the command in `package.json`.
 Чтобы разрешить импорт файлов без использования относительных путей, вы можете добавить параметр `--include-path` к команде в `package.json`.
 
 ```
