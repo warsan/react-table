@@ -226,7 +226,7 @@ See the section about [deployment](#deployment) for more information.
 Подробнее о [различных этапах предложения](https://babeljs.io/docs/plugins/#presets-stage-x-experimental-presets-).
 
 Хотя мы рекомендуем использовать экспериментальные предложения с некоторой осторожностью, Facebook активно использует эти функции в коде продукта, поэтому мы намерены предоставить [codemods](https://medium.com/@cpojer/effective-javascript-codemods-5a6686bb46fb), если какое-либо из этих предложений изменится в будущем.
-Note that **the project only includes a few ES6 [polyfills](https://en.wikipedia.org/wiki/Polyfill)**:
+Обратите внимание, **проект включает только несколько ES6 [полифилов](https://en.wikipedia.org/wiki/Polyfill)**:
 
 * [`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) через [`object-assign`](https://github.com/sindresorhus/object-assign).
 * [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) через [`promise`](https://github.com/then/promise).
