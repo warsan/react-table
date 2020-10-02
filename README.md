@@ -1293,7 +1293,6 @@ HTTPS=true npm start
     </script>
 ```
 
-Then, on the server, you can replace `__SERVER_DATA__` with a JSON of real data right before sending the response. The client code can then read `window.SERVER_DATA` to use it. **Make sure to [sanitize the JSON before sending it to the client](https://medium.com/node-security/the-most-common-xss-vulnerability-in-react-js-applications-2bdffbcc1fa0) as it makes your app vulnerable to XSS attacks.**
 Затем на сервере вы можете заменить `__SERVER_DATA__` на JSON реальных данных прямо перед отправкой ответа. Затем клиентский код может прочитать `window.SERVER_DATA`, чтобы использовать его. **Обязательно [очистите JSON перед его отправкой клиенту](https://medium.com/node-security/the-most-common-xss-vulnerability-in-react-js-applications-2bdffbcc1fa0) поскольку он делает ваше приложение уязвимым для XSS-атак.**
 
 ## Running Tests
@@ -1400,7 +1399,6 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 ```
 
->Note: Keep in mind that if you decide to "eject" before creating `src/setupTests.js`, the resulting `package.json` file won't contain any reference to it. [Read here](#initializing-test-environment) to learn how to add this after ejecting.
 >Примечание: имейте в виду, что если вы решите «извлечь» перед созданием `src/setupTests.js`, полученный файл `package.json` не будет содержать на него никаких ссылок. [Прочтите здесь](#initializing-test-environment), чтобы узнать, как добавить это после извлечения.
 Теперь вы можете написать с ним дымовой тест:
 
@@ -1436,7 +1434,6 @@ it('renders welcome message', () => {
 Все сопоставители Jest [подробно описаны здесь](http://facebook.github.io/jest/docs/en/expect.html).<br>
 Тем не менее, вы можете использовать стороннюю библиотеку утверждений, такую ​​как [Chai](http://chaijs.com/), если хотите, как описано ниже.
 
-Additionally, you might find [jest-enzyme](https://github.com/blainekasten/enzyme-matchers) helpful to simplify your tests with readable matchers. The above `contains` code can be written more simply with jest-enzyme.
 Кроме того, вы можете найти [jest-enzyme](https://github.com/blainekasten/enzyme-matchers) полезным для упрощения ваших тестов с помощью удобочитаемых сопоставителей. Вышеупомянутый код `contains` можно написать более просто с помощью jest-enzyme.
 
 ```js
@@ -1465,7 +1462,6 @@ import 'jest-enzyme';
 
 Мы рекомендуем вам использовать `expect()` для утверждений и `jest.fn()` для шпионов. Если у вас возникли проблемы с ними, пожалуйста, [подавите их против Jest](https://github.com/facebook/jest/issues/new), и мы их исправим. Мы намерены и дальше улучшать их для React, поддерживая, например, [красивую печать элементов React как JSX](https://github.com/facebook/jest/pull/1566).
 
-However, if you are used to other libraries, such as [Chai](http://chaijs.com/) and [Sinon](http://sinonjs.org/), or if you have existing code using them that you’d like to port over, you can import them normally like this:
 Однако, если вы привыкли к другим библиотекам, таким как [Chai](http://chaijs.com/) и [Sinon](http://sinonjs.org/), или если у вас есть существующий код, использующий их, вы хотите перенести, вы можете импортировать их обычно следующим образом:
 
 ```js
@@ -1580,7 +1576,6 @@ script:
 
 #### CircleCI
 
-Follow [this article](https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1) to set up CircleCI with a Create React App project.
 Следуйте [этой статье](https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1), чтобы настроить CircleCI с проектом Create React App.
 
 ### On your own environment
@@ -1618,7 +1613,6 @@ CI=true npm run build
 
 Команда test заставит Jest запустить тесты один раз вместо запуска наблюдателя.
 
->  If you find yourself doing this often in development, please [file an issue](https://github.com/facebookincubator/create-react-app/issues/new) to tell us about your use case because we want to make watcher the best experience and are open to changing how it works to accommodate more workflows.
 > Если вы часто делаете это в процессе разработки, пожалуйста [сообщите о проблеме](https://github.com/facebookincubator/create-react-app/issues/new), чтобы рассказать нам о своем варианте использования, потому что мы хотим сделать наблюдение за лучшим опытом и готовы изменить его работу, чтобы приспособить больше рабочих процессов.
 
 Команда сборки проверит предупреждения линтера и завершится ошибкой, если они будут обнаружены.
@@ -1634,7 +1628,6 @@ CI=true npm run build
     "test": "react-scripts test --env=jsdom"
 ```
 
-If you know that none of your tests depend on [jsdom](https://github.com/tmpvar/jsdom), you can safely remove `--env=jsdom`, and your tests will run faster:
 Если вы знаете, что ни один из ваших тестов не зависит от [jsdom](https://github.com/tmpvar/jsdom), вы можете безопасно удалить `--env=jsdom`, и ваши тесты будут работать быстрее:
 
 ```diff
@@ -1810,7 +1803,6 @@ npm run styleguide
 
 ## Publishing Components to npm
 
-Create React App doesn't provide any built-in functionality to publish a component to npm. If you're ready to extract a component from your project so other people can use it, we recommend moving it to a separate directory outside of your project and then using a tool like [nwb](https://github.com/insin/nwb#react-components-and-libraries) to prepare it for publishing.
 Приложение Create React не предоставляет встроенных функций для публикации компонента в npm. Если вы готовы извлечь компонент из своего проекта, чтобы другие люди могли его использовать, мы рекомендуем переместить его в отдельный каталог вне вашего проекта, а затем использовать такой инструмент, как [nwb](https://github.com/insin/nwb#react-components-and-libraries), чтобы подготовить его к публикации.
 
 ## Making a Progressive Web App
@@ -1962,7 +1954,6 @@ app.listen(9000);
  });
 ```
 
-If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to create a `.htaccess` file in the `public` folder that looks like this:
 Если вы используете [Apache HTTP Server](https://httpd.apache.org/), вам нужно создать файл `.htaccess` в папке `public`, который выглядит следующим образом:
 
 ```
@@ -2034,9 +2025,6 @@ If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to c
 ```sh
     === Настройка проекта
 
-    First, let's associate this project directory with a Firebase project.
-    You can create multiple project aliases by running firebase use --add,
-    but for now we'll just set up a default project. 
     Во-первых, давайте свяжем этот каталог проекта с проектом Firebase.
     Вы можете создать несколько псевдонимов проекта, запустив firebase use --add,
     но пока мы просто настроим проект по умолчанию.
@@ -2165,7 +2153,7 @@ yarn add gh-pages
 
 #### Step 3: Deploy the site by running `npm run deploy`
 
-Then run:
+Затем запустите:
 
 ```sh
 npm run deploy
@@ -2362,6 +2350,7 @@ brew reinstall watchman
 
 Сообщается, что `npm run build` может дать сбой на машинах с ограниченной памятью и без подкачки, что является обычным явлением в облачных средах. Даже в небольших проектах эта команда может увеличить использование оперативной памяти в вашей системе на сотни мегабайт, поэтому, если у вас меньше 1 ГБ доступной памяти, ваша сборка, скорее всего, завершится ошибкой со следующим сообщением:
 
+> Сборка не удалась, потому что процесс завершился слишком рано. Это, вероятно, означает, что системе не хватает памяти или кто-то вызвал «kill -9» в процессе.
 >  The build failed because the process exited too early. This probably means the system ran out of memory or someone called `kill -9` on the process.
 
 Если вы полностью уверены, что не прерывали процесс, подумайте о [добавлении пространства подкачки](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04) к машине, на которой вы строите или создайте проект локально.
