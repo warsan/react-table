@@ -357,7 +357,6 @@ yarn add husky lint-staged prettier
 Теперь, когда вы делаете коммит, Prettier автоматически форматирует изменённые файлы. 
 Вы также можете запустить `./node_modules/.bin/prettier --single-quote --write "src/**/*.{js,jsx,json,css}"` для первого форматирования всего вашего проекта.
 
-Next you might want to integrate Prettier in your favorite editor. Read the section on [Editor Integration](https://prettier.io/docs/en/editors.html) on the Prettier GitHub page.
 Затем вы можете интегрировать Prettier в свой любимый редактор. 
 Прочтите раздел [Интеграция в редактор](https://prettier.io/docs/en/editors.html) на странице Prettier GitHub.
 
