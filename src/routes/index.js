@@ -3,25 +3,29 @@ import { Router, Route, Link } from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
-//import Divider from "@material-ui/core/Divider";
-//import Toolbar from "@material-ui/core/Toolbar";
-//import Typography from "@material-ui/core/Typography";
-//import IconButton from "@material-ui/core/IconButton";
-//import MenuIcon from "@material-ui/icons/Menu";
-
+import Drawer from "@material-ui/core/Drawer";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
+import { withStyles } from "@material-ui/core/styles";
+
+
+import Divider from "@material-ui/core/Divider";
+import Toolbar from "@material-ui/core/Toolbar";
+
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+
 import StarIcon from "@material-ui/icons/Star";
 import SendIcon from "@material-ui/icons/Send";
-//import MailIcon from "@material-ui/icons/Mail";
-//import DeleteIcon from "@material-ui/icons/Delete";
-//import ReportIcon from "@material-ui/icons/Report";
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import DraftsIcon from "@material-ui/icons/Drafts";
+
+import MenuIcon from "@material-ui/icons/Menu";
+import MailIcon from "@material-ui/icons/Mail";
+import DeleteIcon from "@material-ui/icons/Delete";
+import ReportIcon from "@material-ui/icons/Report";
 
 import Home from "../pages/Home";
 import Cards from "../pages/Cards";
@@ -75,36 +79,61 @@ const Routes = props => {
             {/* <div className={classes.toolbar} /> */}
             <List>
               <ListItem button component={Link} to="/">
-                <ListItemIcon><InboxIcon /></ListItemIcon>
-                <ListItemText primary="Главная" /></ListItem>
+                <ListItemIcon><MenuIcon /></ListItemIcon>
+                <ListItemText primary="Главная" />
+              </ListItem>
               <ListItem button component={Link} to="/tabs">
                 <ListItemIcon><InboxIcon /></ListItemIcon>
                 <ListItemText primary="Вкладки" />
               </ListItem>
               <ListItem button component={Link} to="/cards">
-                <ListItemIcon><StarIcon /></ListItemIcon>
-                <ListItemText primary="Открытки" /></ListItem>
+                <ListItemIcon><MailIcon /></ListItemIcon>
+                <ListItemText primary="Открытки" />
+              </ListItem>
               <ListItem button component={Link} to="/navigation">
-                <ListItemIcon><StarIcon /></ListItemIcon>
-                <ListItemText primary="Навигации" /></ListItem>
+                <ListItemIcon><ReportIcon /></ListItemIcon>
+                <ListItemText primary="Навигации" />
+              </ListItem>
               <ListItem button component={Link} to="/gridlist">
                 <ListItemIcon><StarIcon /></ListItemIcon>
-                <ListItemText primary="Сетки" /></ListItem>
+                <ListItemText primary="Сетки" />
+              </ListItem>
               <ListItem button component={Link} to="/forms">
-                <ListItemIcon><SendIcon /></ListItemIcon>
-                <ListItemText primary="Формы" /></ListItem>
+                <ListItemIcon><DeleteIcon /></ListItemIcon>
+                <ListItemText primary="Формы" />
+              </ListItem>
               <ListItem button component={Link} to="/lists">
                 <ListItemIcon><SendIcon /></ListItemIcon>
-                <ListItemText primary="Списки" /></ListItem>
+                <ListItemText primary="Списки" />
+              </ListItem>
               <ListItem button component={Link} to="/modal">
                 <ListItemIcon><SendIcon /></ListItemIcon>
-                <ListItemText primary="Модалка" /></ListItem>
+                <ListItemText primary="Модалка" />
+              </ListItem>
               <ListItem button component={Link} to="/tables">
                 <ListItemIcon><DraftsIcon /></ListItemIcon>
-                <ListItemText primary="Таблицы" /></ListItem>
+                <ListItemText primary="Таблицы" />
+              </ListItem>
               <ListItem button component={Link} to="/themes">
                 <ListItemIcon><DraftsIcon /></ListItemIcon>
-                <ListItemText primary="Темы" /></ListItem>
+                <ListItemText primary="Темы" />
+              </ListItem>
+              <ListItem button component={Link} to="/themes1">
+                <ListItemIcon><Divider /></ListItemIcon>
+                <ListItemText primary="Делитель" />
+              </ListItem>
+              <ListItem button component={Link} to="/themes2">
+                <ListItemIcon><Typography /></ListItemIcon>
+                <ListItemText primary="Типограф" />
+              </ListItem>
+              <ListItem button component={Link} to="/themes3">
+                <ListItemIcon><Toolbar /></ListItemIcon>
+                <ListItemText primary="Панель" />
+              </ListItem>
+              <ListItem button component={Link} to="/themes4">
+                <ListItemIcon><IconButton /></ListItemIcon>
+                <ListItemText primary="Кнопка" />
+              </ListItem>
             </List>
           </Drawer>
           <main className={classes.content}>
