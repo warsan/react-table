@@ -192,7 +192,6 @@ my-app/
 Сборка минифицирована, а имена файлов включают хеши.<br>
 Ваше приложение готово к развёртыванию!
 
-See the section about [deployment](#deployment) for more information.
 См. Раздел о [развертывании](#deployment) для получения дополнительной информации.
 
 ### `npm run eject`
