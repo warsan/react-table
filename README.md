@@ -92,16 +92,16 @@
   - [Now](#now)
   - [S3 and CloudFront](#s3-and-cloudfront)
   - [Surge](#surge)
-- [Advanced Configuration](#advanced-configuration)
-- [Troubleshooting](#troubleshooting)
-  - [`npm start` doesn’t detect changes](#npm-start-doesnt-detect-changes)
-  - [`npm test` hangs on macOS Sierra](#npm-test-hangs-on-macos-sierra)
-  - [`npm run build` exits too early](#npm-run-build-exits-too-early)
-  - [`npm run build` fails on Heroku](#npm-run-build-fails-on-heroku)
-  - [`npm run build` не удается минимизировать](#npm-run-build-не-удается-минимизировать)
-  - [Moment.js locales are missing](#momentjs-locales-are-missing)
-- [Alternatives to Ejecting](#alternatives-to-ejecting)
-- [Something Missing?](#something-missing)
+- [Расширенная конфигурация](#расширенная-конфигурация)
+- [Исправление проблем](#исправление-проблем)
+  - [`npm start` не обнаруживает изменений](#npm-start-не-обнаруживает-изменений)
+  - [`npm test` зависает на macOS Sierra](#npm-test-зависает-на-macos-sierra)
+  - [`npm run build` завершается слишком рано](#npm-run-build-завершается-слишком-рано)
+  - [`npm run build` не работает на Heroku](#npm-run-build-не-работает-на-heroku)
+  - [`npm run build` не удаётся минимизировать](#npm-run-build-не-удаётся-минимизировать)
+  - [Локали Moment.js отсутствуют](#локали-momentjs-отсутствуют)
+- [Альтернативы Выбросу](#альтернативы-выбросу)
+- [Что-то пропало?](#что-то-пропало)
 
 ## Updating to New Releases
 
@@ -2290,7 +2290,7 @@ netlify deploy
 
 Обратите внимание, что для поддержки маршрутизаторов, использующих HTML5 API `pushState`, вы можете захотеть переименовать файл `index.html` в папке сборки в `200.html` перед развёртыванием в Surge. Это [гарантирует, что каждый URL-адрес возвращается к этому файлу](https://surge.sh/help/adding-a-200-page-for-client-side-routing).
 
-## Advanced Configuration
+## Расширенная конфигурация
 
 Вы можете настроить различные параметры разработки и производства, задав переменные среды в своей оболочке или с помощью [.env](#adding-development-environment-variables-in-env).
 
@@ -2307,9 +2307,9 @@ CHOKIDAR_USEPOLLING | :white_check_mark: | :x: | Если установлено
 GENERATE_SOURCEMAP | :x: | :white_check_mark: | Если установлено значение `false`, исходные карты не создаются для производственной сборки. Это решает проблемы OOM на некоторых небольших машинах.
 NODE_PATH | :white_check_mark: |  :white_check_mark: | То же, что [`NODE_PATH` в Node.js](https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders), но разрешены только относительные папки. Может быть удобно для эмуляции настройки монорепозитория путем установки `NODE_PATH=src`.
 
-## Troubleshooting
+## Исправление проблем
 
-### `npm start` doesn’t detect changes
+### `npm start` не обнаруживает изменений
 
 Когда вы сохраняете файл во время работы `npm start`, браузер должен обновиться с обновленным кодом. <br>
 Если этого не произошло, попробуйте один из следующих способов:
@@ -2323,7 +2323,7 @@ NODE_PATH | :white_check_mark: |  :white_check_mark: | То же, что [`NODE_
 
 Если ни одно из этих решений не помогло, оставьте комментарий [в этой теме](https://github.com/facebookincubator/create-react-app/issues/659).
 
-### `npm test` hangs on macOS Sierra
+### `npm test` зависает на macOS Sierra
 
 Если при запуске `npm test` консоль зависает после вывода на консоль `react-scripts test --env=jsdom`, возможно, проблема с вашим [Watchman](https://facebook.github.io/watchman/), как описано в [facebookincubator/create-react-app#713](https://github.com/facebookincubator/create-react-app/issues/713).
 Мы рекомендуем сначала удалить `node_modules` из вашего проекта и запустить `npm install` (или `yarn`, если вы его используете). Если это не поможет, вы можете попробовать один из многочисленных обходных путей, упомянутых в этих проблемах:
@@ -2346,7 +2346,7 @@ brew reinstall watchman
 
 Также есть сообщения, что *удаление* Watchman решает проблему. Так что, если ничего не помогает, удалите его из своей системы и попробуйте ещё раз.
 
-### `npm run build` exits too early
+### `npm run build` завершается слишком рано
 
 Сообщается, что `npm run build` может дать сбой на машинах с ограниченной памятью и без подкачки, что является обычным явлением в облачных средах. Даже в небольших проектах эта команда может увеличить использование оперативной памяти в вашей системе на сотни мегабайт, поэтому, если у вас меньше 1 ГБ доступной памяти, ваша сборка, скорее всего, завершится ошибкой со следующим сообщением:
 
@@ -2355,12 +2355,12 @@ brew reinstall watchman
 
 Если вы полностью уверены, что не прерывали процесс, подумайте о [добавлении пространства подкачки](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04) к машине, на которой вы строите или создайте проект локально.
 
-### `npm run build` fails on Heroku
+### `npm run build` не работает на Heroku
 
 Это может быть проблема с именами файлов, чувствительными к регистру.
 См. [Этот раздел](#resolving-heroku-deployment-errors).
 
-### Moment.js locales are missing
+### Локали Moment.js отсутствуют
 
 Если вы используете [Moment.js](https://momentjs.com/), вы можете заметить, что по умолчанию доступен только английский язык. Это связано с тем, что файлы локалей велики, и вам, вероятно, понадобится только подмножество [всех локалей, предоставляемых Moment.js](https://momentjs.com/#multiple-locale-support).
 
@@ -2402,10 +2402,10 @@ moment.locale('fr');
 
 В будущем мы можем начать автоматическую компиляцию несовместимых сторонних модулей, но в настоящее время это не поддерживается. Такой подход также замедлит производственные сборки.
 
-## Alternatives to Ejecting
+## Альтернативы Выбросу
 
 [Ejecting](#npm-run-eject) позволяет настраивать что угодно, но с этого момента вам придется самостоятельно поддерживать конфигурацию и сценарии. Это может быть сложно, если у вас много похожих проектов. В таких случаях вместо выброса рекомендуется *fork* `react-scripts` и любые другие необходимые вам пакеты. [Эта статья](https://auth0.com/blog/how-to-configure-create-react-app/) подробно описывает, как это сделать. Вы можете найти более подробное обсуждение в [этой проблеме](https://github.com/facebookincubator/create-react-app/issues/682).
 
-## Something Missing?
+## Что-то пропало?
 
 Если у вас есть идеи по поводу дополнительных рецептов, которые должны быть на этой странице, [сообщите нам](https://github.com/facebookincubator/create-react-app/issues) или [внесите свой вклад!](https://github.com/facebookincubator/create-react-app/edit/master/packages/react-scripts/template/README.md)
