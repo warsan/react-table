@@ -60,15 +60,15 @@ function registerValidSW(swUrl) {
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
-              // At this point, the old content will have been purged and
-              // the fresh content will have been added to the cache.
-              // It's the perfect time to display a "New content is
-              // available; please refresh." message in your web app.
+              // На этом этапе старый контент будет очищен,
+              // а новый контент будет добавлен в кеш.
+              // Это идеальное время для отображения сообщения «Доступен новый контент; обновите».
+              // сообщение в вашем веб-приложении.
               console.log('Доступен новый контент; пожалуйста, обновите.');
             } else {
-              // At this point, everything has been precached.
-              // It's the perfect time to display a
-              // "Content is cached for offline use." message.
+              // На данный момент всё готово.
+              // Это идеальное время для отображения сообщения
+              // «Контент кэширован для использования в автономном режиме». сообщение.
               console.log('Контент кэшируется для использования в автономном режиме.');
             }
           }
@@ -81,22 +81,22 @@ function registerValidSW(swUrl) {
 }
 
 function checkValidServiceWorker(swUrl) {
-  // Check if the service worker can be found. If it can't reload the page.
+  // Проверьте, можно ли найти сервисного работника. Если не удается перезагрузить страницу.
   fetch(swUrl)
     .then(response => {
-      // Ensure service worker exists, and that we really are getting a JS file.
+      // Убедитесь, что сервис-воркер существует и что мы действительно получаем файл JS.
       if (
         response.status === 404 ||
         response.headers.get('content-type').indexOf('javascript') === -1
       ) {
-        // No service worker found. Probably a different app. Reload the page.
+        // Сервисный работник не найден. Наверное, другое приложение. Обновите страницу.
         navigator.serviceWorker.ready.then(registration => {
           registration.unregister().then(() => {
             window.location.reload();
           });
         });
       } else {
-        // Service worker found. Proceed as normal.
+        // Сервисный работник найден. Действуйте как обычно.
         registerValidSW(swUrl);
       }
     })
