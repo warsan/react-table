@@ -47,43 +47,43 @@
   - [Ruby on Rails](#ruby-on-rails)
 - [Proxying API Requests in Development](#proxying-api-requests-in-development)
   - ["Invalid Host Header" Errors After Configuring Proxy](#invalid-host-header-errors-after-configuring-proxy)
-  - [Configuring the Proxy Manually](#configuring-the-proxy-manually)
-  - [Configuring a WebSocket Proxy](#configuring-a-websocket-proxy)
-- [Using HTTPS in Development](#using-https-in-development)
-- [Generating Dynamic `<meta>` Tags on the Server](#generating-dynamic-meta-tags-on-the-server)
-- [Pre-Rendering into Static HTML Files](#pre-rendering-into-static-html-files)
-- [Injecting Data from the Server into the Page](#injecting-data-from-the-server-into-the-page)
-- [Running Tests](#running-tests)
-  - [Filename Conventions](#filename-conventions)
-  - [Command Line Interface](#command-line-interface)
-  - [Version Control Integration](#version-control-integration)
-  - [Writing Tests](#writing-tests)
-  - [Testing Components](#testing-components)
-  - [Using Third Party Assertion Libraries](#using-third-party-assertion-libraries)
-  - [Initializing Test Environment](#initializing-test-environment)
-  - [Focusing and Excluding Tests](#focusing-and-excluding-tests)
-  - [Coverage Reporting](#coverage-reporting)
-  - [Continuous Integration](#continuous-integration)
-  - [Disabling jsdom](#disabling-jsdom)
-  - [Snapshot Testing](#snapshot-testing)
-  - [Editor Integration](#editor-integration)
-- [Debugging Tests](#debugging-tests)
-  - [Debugging Tests in Chrome](#debugging-tests-in-chrome)
-  - [Debugging Tests in Visual Studio Code](#debugging-tests-in-visual-studio-code)
-- [Developing Components in Isolation](#developing-components-in-isolation)
-  - [Getting Started with Storybook](#getting-started-with-storybook)
-  - [Getting Started with Styleguidist](#getting-started-with-styleguidist)
-- [Publishing Components to npm](#publishing-components-to-npm)
-- [Making a Progressive Web App](#making-a-progressive-web-app)
-  - [Opting Out of Caching](#opting-out-of-caching)
-  - [Offline-First Considerations](#offline-first-considerations)
-  - [Progressive Web App Metadata](#progressive-web-app-metadata)
-- [Analyzing the Bundle Size](#analyzing-the-bundle-size)
-- [Deployment](#deployment)
-  - [Static Server](#static-server)
-  - [Other Solutions](#other-solutions)
-  - [Serving Apps with Client-Side Routing](#serving-apps-with-client-side-routing)
-  - [Building for Relative Paths](#building-for-relative-paths)
+  - [Настройка прокси вручную](#настройка-прокси-вручную)
+  - [Настройка прокси-сервера WebSocket](#настройка-прокси-сервера-websocket)
+- [Использование HTTPS в разработке](#использование-https-в-разработке)
+- [Создание динамических тегов `<meta>` на сервере](#создание-динамических-тегов-meta-на-сервере)
+- [Предрендеринг в статические файлы HTML](#предрендеринг-в-статические-файлы-html)
+- [Внедрение данных с сервера на страницу](#внедрение-данных-с-сервера-на-страницу)
+- [Запуск тестов](#запуск-тестов)
+  - [Соглашения об именах файлов](#соглашения-об-именах-файлов)
+  - [Интерфейс командной строки](#интерфейс-командной-строки)
+  - [Интеграция контроля версий](#интеграция-контроля-версий)
+  - [Создание тестов](#создание-тестов)
+  - [Компоненты тестов](#компоненты-тестов)
+  - [Использование сторонних библиотек утверждений](#использование-сторонних-библиотек-утверждений)
+  - [Инициализация тестовой среды](#инициализация-тестовой-среды)
+  - [Фокусирование и исключение тестов](#фокусирование-и-исключение-тестов)
+  - [Отчётность о покрытии](#отчётность-о-покрытии)
+  - [Непрерывная интеграция](#непрерывная-интеграция)
+  - [Отключение jsdom](#отключение-jsdom)
+  - [Тест снимков](#тест-снимков)
+  - [Интеграция редактора](#интеграция-редактора)
+- [Отладочные тесты](#отладочные-тесты)
+  - [Отладочные тесты в Chrome](#отладочные-тесты-в-chrome)
+  - [Отладочные тесты в Visual Studio Code](#отладочные-тесты-в-visual-studio-code)
+- [Разработка компонентов в изоляции](#разработка-компонентов-в-изоляции)
+  - [Начало работы со Storybook](#начало-работы-со-storybook)
+  - [Начало работы со Styleguidist](#начало-работы-со-styleguidist)
+- [Компоненты публикации npm](#компоненты-публикации-npm)
+- [Создание прогрессивного Web App](#создание-прогрессивного-web-app)
+  - [Отказ от кешинга](#отказ-от-кешинга)
+  - [Оффлайн-Первые соображения](#оффлайн-первые-соображения)
+  - [Метаданные прогрессивных веб-приложений](#метаданные-прогрессивных-веб-приложений)
+- [Анализ размера пакета](#анализ-размера-пакета)
+- [Развёртывание](#Развёртывание)
+  - [Статический сервер](#статический-сервер)
+  - [Другие решения](#другие-решения)
+  - [Обслуживание приложений с помощью клиентской маршрутизации](#обслуживание-приложений-с-помощью-клиентской-маршрутизации)
+  - [Построение относительных путей](#построение-относительных-путей)
   - [Azure](#azure)
   - [Firebase](#firebase)
   - [GitHub Pages](#github-pages)
@@ -1135,7 +1135,7 @@ DANGEROUSLY_DISABLE_HOST_CHECK=true
 
 Мы не рекомендуем такой подход.
 
-### Configuring the Proxy Manually
+### Настройка прокси вручную
 
 >Примечание: эта функция доступна в `react-scripts@1.0.0` и выше.
 
@@ -1193,7 +1193,7 @@ DANGEROUSLY_DISABLE_HOST_CHECK=true
 }
 ```
 
-### Configuring a WebSocket Proxy
+### Настройка прокси-сервера WebSocket
 
 При настройке прокси-сервера WebSocket необходимо учитывать некоторые дополнительные соображения.
 
@@ -1223,7 +1223,7 @@ DANGEROUSLY_DISABLE_HOST_CHECK=true
 }
 ```
 
-## Using HTTPS in Development
+## Использование HTTPS в разработке
 
 >Примечание: эта функция доступна в `react-scripts@0.4.0` и выше.
 
@@ -1253,7 +1253,7 @@ HTTPS=true npm start
 
 Обратите внимание, что сервер будет использовать самозаверяющий сертификат, поэтому ваш веб-браузер почти наверняка отобразит предупреждение при доступе к странице.
 
-## Generating Dynamic `<meta>` Tags on the Server
+## Создание динамических тегов `<meta>` на сервере
 
 Поскольку приложение Create React не поддерживает рендеринг на сервере, вам может быть интересно, как сделать теги `<meta>` динамическими и отражать текущий URL. 
 Чтобы решить эту проблему, мы рекомендуем добавлять заполнители в HTML, например:
@@ -1270,7 +1270,7 @@ HTTPS=true npm start
 
 Если вы используете сервер Node, вы даже можете совместно использовать логику сопоставления маршрутов между клиентом и сервером. Однако его дублирование также отлично работает и в простых случаях.
 
-## Pre-Rendering into Static HTML Files
+## Предрендеринг в статические файлы HTML
 
 Если вы размещаете свою сборку у статического хостинг-провайдера, вы можете использовать [react-snapshot](https://www.npmjs.com/package/react-snapshot) или [react-snap](https://github.com/stereobooster/react-snap) для создания HTML-страниц для каждого маршрута или относительной ссылки в вашем приложении. Эти страницы затем станут активными или «гидратированными» после загрузки пакета JavaScript.
 
@@ -1280,7 +1280,7 @@ HTTPS=true npm start
 
 Вы можете узнать больше о [предварительной визуализации с нулевой конфигурацией (также называемой моментальным снимком) здесь](https://medium.com/superhighfives/an-almost-static-stack-6df0a2791319).
 
-## Injecting Data from the Server into the Page
+## Внедрение данных с сервера на страницу
 
 Как и в предыдущем разделе, вы можете оставить в HTML несколько заполнителей, которые вводят глобальные переменные, например:
 
@@ -1295,7 +1295,7 @@ HTTPS=true npm start
 
 Затем на сервере вы можете заменить `__SERVER_DATA__` на JSON реальных данных прямо перед отправкой ответа. Затем клиентский код может прочитать `window.SERVER_DATA`, чтобы использовать его. **Обязательно [очистите JSON перед его отправкой клиенту](https://medium.com/node-security/the-most-common-xss-vulnerability-in-react-js-applications-2bdffbcc1fa0) поскольку он делает ваше приложение уязвимым для XSS-атак.**
 
-## Running Tests
+## Запуск тестов
 
 > Примечание: эта функция доступна в `react-scripts@0.3.0` и выше. <br>
 > [Прочтите руководство по миграции, чтобы узнать, как включить его в старых проектах!](https://github.com/facebookincubator/create-react-app/blob/master/CHANGELOG.md#migrating-from-023-to-030)
@@ -1308,7 +1308,7 @@ Jest - это раннер на основе узлов. Это означает
 
 Мы рекомендуем вам использовать отдельный инструмент для сквозных тестов браузера, если они вам нужны. Они выходят за рамки приложения Create React.
 
-### Filename Conventions
+### Соглашения об именах файлов
 
 Jest будет искать тестовые файлы с любым из следующих популярных соглашений об именах:
 
@@ -1320,7 +1320,7 @@ Jest будет искать тестовые файлы с любым из сл
 
 Мы рекомендуем помещать тестовые файлы (или папки `__tests__`) рядом с кодом, который они тестируют, чтобы относительный импорт казался короче. Например, если `App.test.js` и `App.js` находятся в одной папке, тесту просто нужно `импортировать приложение из './App'` вместо длинного относительного пути. Совместное размещение также помогает быстрее находить тесты в более крупных проектах.
 
-### Command Line Interface
+### Интерфейс командной строки
 
 Когда вы запускаете `npm test`, Jest запускается в режиме часов. Каждый раз, когда вы сохраняете файл, он будет повторно запускать тесты, так же как `npm start` перекомпилирует код.
 
@@ -1328,7 +1328,7 @@ Jest будет искать тестовые файлы с любым из сл
 
 ![Режим часов Jest](http://facebook.github.io/jest/img/blog/15-watch.gif)
 
-### Version Control Integration
+### Интеграция контроля версий
 
 По умолчанию, когда вы запускаете `npm test`, Jest запускает только тесты, относящиеся к файлам, измененным с момента последней фиксации. Это оптимизация, призванная ускорить выполнение ваших тестов независимо от того, сколько у вас тестов. Однако предполагается, что вы не часто фиксируете код, не прошедший тесты.
 
@@ -1336,7 +1336,7 @@ Jest всегда явно упоминает, что он запускал то
 
 Jest всегда будет запускать все тесты на сервере [непрерывной интеграции](#continuous-integration) или если проект не находится внутри репозитория Git или Mercurial.
 
-### Writing Tests
+### Создание тестов
 
 Для создания тестов добавьте блоки `it()` (или `test()`) с именем теста и его кодом. Вы можете при желании заключить их в блоки `describe()` для логической группировки, но это не требуется и не рекомендуется.
 
@@ -1354,7 +1354,7 @@ it('sums numbers', () => {
 Все сопоставители `expect()`, поддерживаемые Jest, [подробно описаны здесь](https://facebook.github.io/jest/docs/en/expect.html#content).<br>
 Вы также можете использовать [`jest.fn()` и `expect(fn).toBeCalled()`](https://facebook.github.io/jest/docs/en/expect.html#tohavebeencalled) для создания «шпионов» или имитаторов функции.
 
-### Testing Components
+### Компоненты тестов
 
 Существует широкий спектр методов тестирования компонентов. Они варьируются от «дымового теста», подтверждающего, что компонент отображается без выброса, до поверхностного рендеринга и тестирования некоторых выходных данных, до полного рендеринга и тестирования жизненного цикла компонента и изменений состояния.
 
@@ -1458,7 +1458,7 @@ yarn add jest-enzyme
 import 'jest-enzyme';
 ```
 
-### Using Third Party Assertion Libraries
+### Использование сторонних библиотек утверждений
 
 Мы рекомендуем вам использовать `expect()` для утверждений и `jest.fn()` для шпионов. Если у вас возникли проблемы с ними, пожалуйста, [подавите их против Jest](https://github.com/facebook/jest/issues/new), и мы их исправим. Мы намерены и дальше улучшать их для React, поддерживая, например, [красивую печать элементов React как JSX](https://github.com/facebook/jest/pull/1566).
 
@@ -1471,7 +1471,7 @@ import { expect } from 'chai';
 
 а затем используйте их в своих тестах, как обычно.
 
-### Initializing Test Environment
+### Инициализация тестовой среды
 
 > Примечание: эта функция доступна в `react-scripts@0.4.0` и выше.
 
@@ -1498,21 +1498,26 @@ global.localStorage = localStorageMock
 >  }
 >  ```
 
-### Focusing and Excluding Tests
+### Фокусирование и исключение тестов
 
 Вы можете заменить `it()` на `xit()`, чтобы временно исключить выполнение теста.<br>
 Точно так же `fit()` позволяет вам сосредоточиться на конкретном тесте без запуска каких-либо других тестов.
 
-### Coverage Reporting
+### Отчётность о покрытии
 
-Jest имеет встроенный репортер покрытия, который хорошо работает с ES6 и не требует настройки. <br>
-Запустите `npm test -- --coverage` (обратите внимание на дополнительный `--` посередине), чтобы включить такой отчет о покрытии:
+Jest имеет встроенный репортёр покрытия, который хорошо работает с ES6 и не требует настройки. <br>
+Запустите `npm test -- --coverage` (обратите внимание на дополнительный `--` посередине), чтобы включить такой отчёт о покрытии:
 
 ![отчёт о покрытии](http://i.imgur.com/5bFhnTS.png)
 
 Обратите внимание, что тесты выполняются намного медленнее с покрытием, поэтому рекомендуется запускать его отдельно от обычного рабочего процесса.
 
-#### Configuration
+#### Конфигурация
+
+имя существительное:
+    конфигурация (configuration, set, fashion)
+    форма (form, shape, mold, uniform, format, mode)
+    очертание (outline, shape, cutout, form, contour, configuration)
 
 Конфигурацию покрытия Jest по умолчанию можно изменить, добавив любой из следующих поддерживаемых ключей в конфигурацию Jest в вашем package.json.
 
@@ -1547,7 +1552,7 @@ Jest имеет встроенный репортер покрытия, кото
 }
 ```
 
-### Continuous Integration
+### Непрерывная интеграция
 
 По умолчанию npm test запускает наблюдатель с интерактивным интерфейсом командной строки. Однако вы можете принудительно запустить тесты один раз и завершить процесс, установив переменную среды с именем `CI`.
 
@@ -1555,7 +1560,7 @@ Jest имеет встроенный репортер покрытия, кото
 
 Популярные CI-серверы уже устанавливают переменную окружения `CI` по умолчанию, но вы тоже можете сделать это самостоятельно:
 
-### On CI servers
+### На серверах CI
 #### Travis CI
 
 1. Следуя руководству [Начало работы с Трэвисом](https://docs.travis-ci.com/user/getting-started/) по синхронизации репозитория GitHub с Трэвисом. Возможно, вам придется вручную инициализировать некоторые настройки на странице вашего [профиля](https://travis-ci.org/profile).
@@ -1578,7 +1583,7 @@ script:
 
 Следуйте [этой статье](https://medium.com/@knowbody/circleci-and-zeits-now-sh-c9b7eebcd3c1), чтобы настроить CircleCI с проектом Create React App.
 
-### On your own environment
+### В вашем окружении
 ##### Windows (cmd.exe)
 
 ```cmd
@@ -1617,7 +1622,7 @@ CI=true npm run build
 
 Команда сборки проверит предупреждения линтера и завершится ошибкой, если они будут обнаружены.
 
-### Disabling jsdom
+### Отключение jsdom
 
 По умолчанию `package.json` сгенерированного проекта выглядит так:
 
@@ -1652,23 +1657,23 @@ CI=true npm run build
 
 Наконец, jsdom также не нужен для [тестирования снимков](http://facebook.github.io/jest/blog/2016/07/27/jest-14.html).
 
-### Snapshot Testing
+### Тест снимков
 
 Тестирование моментальных снимков - это функция Jest, которая автоматически генерирует текстовые снимки ваших компонентов и сохраняет их на диске, поэтому при изменении вывода пользовательского интерфейса вы получаете уведомление, не записывая вручную никаких утверждений в выводе компонента. [Подробнее о тестировании снимков.](http://facebook.github.io/jest/blog/2016/07/27/jest-14.html)
 
-### Editor Integration
+### Интеграция редактора
 
 Если вы используете [Visual Studio Code](https://code.visualstudio.com), есть [расширение Jest](https://github.com/orta/vscode-jest), которое работает с приложением Create React из коробки. Это обеспечивает множество функций, подобных IDE, при использовании текстового редактора: отображение состояния тестового прогона с сообщениями о потенциальных сбоях в строке, автоматический запуск и остановка наблюдателя и предложение обновлений моментальных снимков одним щелчком мыши.
 
 ![VS Code - предпросмотр](https://cloud.githubusercontent.com/assets/49038/20795349/a032308a-b7c8-11e6-9b34-7eeac781003f.png)
 
-## Debugging Tests
+## Отладочные тесты
 
 Есть разные способы настроить отладчик для ваших тестов Jest. Мы рассматриваем отладку в Chrome и [Visual Studio Code](https://code.visualstudio.com/).
 
 >Примечание: для отладки тестов требуется Node 8 или выше.
 
-### Debugging Tests in Chrome
+### Отладочные тесты в Chrome
 
 Добавьте следующее в раздел `scripts` в вашем проекте `package.json`
 ```json
@@ -1692,7 +1697,7 @@ about:inspect
 
 >Примечание: параметр --runInBand cli гарантирует, что Jest запускает тест в одном процессе, а не порождает процессы для отдельных тестов. Обычно Jest распараллеливает прогоны тестов между процессами, но отлаживать несколько процессов одновременно сложно.
 
-### Debugging Tests in Visual Studio Code
+### Отладочные тесты в Visual Studio Code
 
 Отладка тестов Jest "из коробки" поддерживается для [Visual Studio Code](https://code.visualstudio.com).
 
@@ -1721,7 +1726,7 @@ about:inspect
 }
 ```
 
-## Developing Components in Isolation
+## Разработка компонентов в изоляции
 
 Обычно в приложении есть много компонентов пользовательского интерфейса, и каждый из них имеет много разных состояний.
 Например, простой компонент кнопки может иметь следующие состояния:
@@ -1738,9 +1743,9 @@ about:inspect
 
 Вы также можете развернуть свой сборник рассказов или руководство по стилю как статическое приложение. Таким образом, каждый в вашей команде может просматривать и проверять различные состояния компонентов пользовательского интерфейса без запуска внутреннего сервера или создания учетной записи в вашем приложении.
 
-### Getting Started with Storybook
+### Начало работы со Storybook
 
-Storybook - это среда разработки для компонентов React UI. Он позволяет вам просматривать библиотеку компонентов, просматривать различные состояния каждого компонента, а также в интерактивном режиме разрабатывать и тестировать компоненты.
+Storybook - это среда разработки для компонентов React UI. Он позволяет вам просматривать библиотеку компонентов, различные состояния каждого компонента, а также разрабатывать и тестировать компоненты в интерактивном режиме.
 
 Сначала установите глобально следующий пакет npm:
 
@@ -1763,7 +1768,7 @@ getstorybook
 * [Документация](https://storybook.js.org/basics/introduction/)
 * [Тест снимков UI](https://github.com/storybooks/storybook/tree/master/addons/storyshots) with Storybook + addon/storyshot
 
-### Getting Started with Styleguidist
+### Начало работы со Styleguidist
 
 Styleguidist сочетает в себе руководство по стилю, где все ваши компоненты представлены на одной странице с их документацией по реквизитам и примерами использования, со средой для изолированной разработки компонентов, аналогичной Storybook. В Styleguidist вы пишете примеры в Markdown, где каждый фрагмент кода отображается в виде живой редактируемой площадки.
 
@@ -1801,11 +1806,11 @@ npm run styleguide
 * [GitHub Repo](https://github.com/styleguidist/react-styleguidist)
 * [Документация](https://react-styleguidist.js.org/docs/getting-started.html)
 
-## Publishing Components to npm
+## Компоненты публикации npm
 
 Приложение Create React не предоставляет встроенных функций для публикации компонента в npm. Если вы готовы извлечь компонент из своего проекта, чтобы другие люди могли его использовать, мы рекомендуем переместить его в отдельный каталог вне вашего проекта, а затем использовать такой инструмент, как [nwb](https://github.com/insin/nwb#react-components-and-libraries), чтобы подготовить его к публикации.
 
-## Making a Progressive Web App
+## Создание прогрессивного Web App
 
 По умолчанию производственная сборка является полностью функциональной, сначала автономной.
 [Прогрессивное веб-приложение](https://developers.google.com/web/progressive-web-apps/).
@@ -1821,7 +1826,7 @@ npm run styleguide
 предварительно кэширует все свои локальные ресурсы и поддерживает их в актуальном состоянии по мере развертывания обновлений.
 Сервисный работник будет использовать [стратегию первого кеширования](https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook/#cache-falling-back-to-network) для обработки всех запросов на локальные ресурсы, включая исходный HTML-код, обеспечивая надежную работу вашего веб-приложения даже в медленной или ненадежной сети.
 
-### Opting Out of Caching
+### Отказ от кешинга
 
 Если вы предпочитаете не включать сервис-воркеров до первоначального производственного развертывания, удалите вызов `registerServiceWorker ()` из [`src/index.js`](src/index.js).
 
@@ -1831,7 +1836,7 @@ import { unregister } from './registerServiceWorker';
 ```
 а затем вместо этого вызовите `unregister()`. После того как пользователь посетит страницу, на которой есть `unregister()`, сервисный работник будет удален. Обратите внимание, что в зависимости от того, как обслуживается `/service-worker.js`, аннулирование кеша может занять до 24 часов.
 
-### Offline-First Considerations
+### Оффлайн-Первые соображения
 
 1. Сервисным работникам [требуется HTTPS](https://developers.google.com/web/fundamentals/getting-started/primers/service-workers#you_need_https), хотя для облегчения локального тестирования эта политика [не применяется к `localhost`](http://stackoverflow.com/questions/34160509/options-for-testing-service-workers-via-http/34161385#34161385).
 Если ваш производственный веб-сервер не поддерживает HTTPS, регистрация сервис-воркера не удастся, но остальная часть вашего веб-приложения останется работоспособной.
@@ -1852,13 +1857,13 @@ import { unregister } from './registerServiceWorker';
 
 1. По умолчанию сгенерированный файл сервис-воркера не будет перехватывать и кэшировать какой-либо трафик из разных источников, например HTTP [запросы API](#integrating-with-an-api-backend), изображения или встраиваемые файлы, загруженные из другого домена. Если вы хотите использовать стратегию кэширования времени выполнения для этих запросов, вы можете [`eject`](#npm-run-eject), а затем настроить [`runtimeCaching`](https://github.com/GoogleChrome/sw-precache#runtimecaching-arrayobject) в разделе `SWPrecacheWebpackPlugin` файла [`webpack.config.prod.js`](../config/webpack.config.prod.js).
 
-### Progressive Web App Metadata
+### Метаданные прогрессивных веб-приложений
 
 Конфигурация по умолчанию включает в себя манифест веб-приложения, расположенный в [`public/manifest.json`](public/manifest.json), который вы можете настроить, указав детали, специфичные для вашего веб-приложения.
 
 Когда пользователь добавляет веб-приложение на свой рабочий стол с помощью Chrome или Firefox на Android, метаданные в [`manifest.json`](public/manifest.json) определяют, какие значки, имена и цвета брендинга использовать, когда веб-приложение отображается. [Руководство по манифесту веб-приложения](https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/) предоставляет более подробную информацию о том, что означает каждое поле и как ваши настройки повлияют на опыт ваших пользователей.
 
-## Analyzing the Bundle Size
+## Анализ размера пакета
 
 [Обозреватель исходных карт](https://www.npmjs.com/package/source-map-explorer) анализирует пакеты JavaScript с использованием исходных карт. Это поможет вам понять, откуда происходит раздувание кода.
 
@@ -1891,11 +1896,15 @@ npm run build
 npm run analyze
 ```
 
-## Deployment
+## Развёртывание
+
+имя существительное:
+    развертывание (deployment, deploy, development, evolution, discovery, explication)
+    размещение (placement, placing, deployment, allocation, layout, disposal)
 
 `npm run build` создает каталог `build` с производственной сборкой вашего приложения. Настройте ваш любимый HTTP-сервер так, чтобы посетитель вашего сайта обслуживал `index.html`, а запросы к статическим путям, например, `/static/js/main.<hash>.js`, обслуживались содержимым файла `/static/js/main.<hash>.js`.
 
-### Static Server
+### Статический сервер
 
 Для сред, использующих [Node](https://nodejs.org/), самый простой способ справиться с этим - установить [serve](https://github.com/zeit/serve) и позволить ему сделать всё остальное:
 
@@ -1913,7 +1922,7 @@ serve -s build
 serve -h
 ```
 
-### Other Solutions
+### Другие решения
 
 Вам не обязательно нужен статический сервер для запуска проекта Create React App в рабочей среде. Он так же прекрасно работает в интеграции с существующим динамическим.
 
@@ -1939,7 +1948,7 @@ app.listen(9000);
 
 Однако этого недостаточно, если вы используете маршрутизацию на стороне клиента. Прочтите следующий раздел, если вы хотите поддерживать URL-адреса типа `/todos/42` в своем одностраничном приложении.
 
-### Serving Apps with Client-Side Routing
+### Обслуживание приложений с помощью клиентской маршрутизации
 
 Если вы используете маршрутизаторы, которые используют HTML5 [`pushState` history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API#Adding_and_modifying_history_entries) под капотом (например, [React Router](https://github.com/ReactTraining/react-router) с помощью browserHistory), многие статические файловые серверы выйдут из строя. Например, если вы использовали React Router с маршрутом для `/todos/42`, сервер разработки будет правильно отвечать на `localhost:3000/todos/42`, а Express, обслуживающий производственную сборку, как указано выше, не будет.
 
@@ -1978,7 +1987,7 @@ app.listen(9000);
   "start_url": ".",
 ```
 
-### Building for Relative Paths
+### Построение относительных путей
 
 По умолчанию Create React App создает сборку, если ваше приложение размещено в корне сервера. <br>
 Чтобы переопределить это, укажите `домашнюю страницу` в вашем `package.json`, например:
@@ -1998,7 +2007,7 @@ app.listen(9000);
 <Link to="/today"/> // оказывает <a href="/calendar/today">
 ```
 
-#### Serving the Same Build from Different Paths
+#### Обслуживание одной и той же сборки с разных путей
 
 > Примечание: эта функция доступна в `react-scripts@0.9.0` и выше.
 
