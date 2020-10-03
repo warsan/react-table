@@ -46,7 +46,7 @@
   - [Node](#node)
   - [Ruby on Rails](#ruby-on-rails)
 - [Proxying API Requests in Development](#proxying-api-requests-in-development)
-  - ["Invalid Host Header" Errors After Configuring Proxy](#invalid-host-header-errors-after-configuring-proxy)
+  - [Ошибки `Недопустимый заголовок хоста` после настройки прокси](#ошибки-недопустимый-заголовок-хоста-после-настройки-прокси)
   - [Настройка прокси вручную](#настройка-прокси-вручную)
   - [Настройка прокси-сервера WebSocket](#настройка-прокси-сервера-websocket)
 - [Использование HTTPS в разработке](#использование-https-в-разработке)
@@ -1108,7 +1108,7 @@ Fetch API не может загрузить http://localhost:4000/api/todos. Н
 * Включить CORS на своем сервере ([вот как это сделать для Express](http://enable-cors.org/server_expressjs.html)).
 * Использовать [переменные среды](#adding-custom-environment-variables), чтобы добавить правильный хост и порт сервера в ваше приложение.
 
-### "Invalid Host Header" Errors After Configuring Proxy
+### Ошибки `Недопустимый заголовок хоста` после настройки прокси
 
 Когда вы включаете опцию `proxy`, вы выбираете более строгий набор проверок хоста. Это необходимо, потому что если оставить серверную часть открытой для удаленных хостов, ваш компьютер станет уязвимым для атак повторного связывания DNS. Проблема объясняется в [этой статье](https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a) и [в этом выпуске](https://github.com/webpack/webpack-dev-server/issues/887).
 
